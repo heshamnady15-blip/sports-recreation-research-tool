@@ -42,8 +42,7 @@ Gemini على الويب أو التطبيق: ارفع `dist/sport-recreation-gy
 ## تحديث الأرشيف
 
 ```bash
-python3 .agents/skills/sport-recreation-gymnastics-research/scripts/validate_skill.py
-python3 .agents/skills/sport-recreation-gymnastics-research/scripts/package_skill.py
+python3 .agents/skills/sport-recreation-gymnastics-research/scripts/run_checks.py
 ```
 
-الأمر الأول يتحقق من الاسم والوصف وحد 500 سطر ووجود القوالب. الأمر الثاني يعيد بناء أرشيفي `dist/`.
+يفحص ملفات المهارة، والروابط الداخلية، ورابط Claude، وبيانات ChatGPT، وجذر أرشيف كل منصة. فحص اختلاف اسم المجلد عن اسم المهارة اختبار سلبي: نجاحه أن يرفض المدقق المجلد، وهذا رفض متوقع لا عيب في المهارة.

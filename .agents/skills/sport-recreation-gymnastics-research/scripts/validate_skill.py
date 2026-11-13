@@ -94,9 +94,15 @@ def main() -> None:
         errors.append(f"name {name!r} does not match folder {SKILL_ROOT.name!r}")
     if not re.fullmatch(r"[a-z0-9]+(?:-[a-z0-9]+)*", name or ""):
         errors.append(f"illegal skill name: {name!r}")
+    if len(name) > 64:
+        errors.append(f"skill name has {len(name)} characters; the limit is 64")
+    if "claude" in name or "anthropic" in name:
+        errors.append("skill name is rejected by Claude when it contains claude or anthropic")
     description = re.sub(r"\s+", " ", keys.get("description", "")).strip()
     if not 1 <= len(description) <= 1024:
         errors.append(f"description length {len(description)} is outside 1-1024")
+    if "<" in description or ">" in description:
+        errors.append("description contains XML markup; Claude rejects it")
     compatibility = re.sub(r"\s+", " ", keys.get("compatibility", "")).strip()
     if compatibility and len(compatibility) > 500:
         errors.append("compatibility is longer than 500 characters")
