@@ -1,0 +1,18 @@
+{
+  "source_title": "قواعد ونظام عمل اللجان العلمية لفحص الإنتاج العلمي، الدورة الخامسة عشرة 2025-2028",
+  "article": "مادة 17، جدول 1",
+  "pdf_page_label": "11",
+  "source_url": "https://scu.eg/download/rules-and-regulations-of-the-scientific-committees-15th-term/",
+  "file_url": "https://scu.eg/?wpdmdl=49473",
+  "transcribed_on": "2026-11-13",
+  "use": "نقاط الدورية في ملف الترقية فقط. درجة المجلة المحددة لمتقدم بعينه تؤخذ من تقرير وحدة المكتبات الرقمية لسنة النشر، لا من هذا الجدول وحده ولا من موقع المجلة.",
+  "specialized": {
+    "scopus": {"Q1-Class A": 9.5, "Q1": 9.0, "Q2": 8.5, "Q3": 8.0, "Q4": 7.5},
+    "web_of_science": {"Q1": 10.0, "Q2": 9.5, "Q3": 9.0, "Q4": 8.5}
+  },
+  "non_specialized": {
+    "scopus": {"Q1": 8.5, "Q2": 8.0, "Q3": 7.5, "Q4": 7.0},
+    "web_of_science": {"Q1": 9.0, "Q2": 8.5, "Q3": 8.0, "Q4": 7.5}
+  },
+  "esci_or_scopus_without_citescore": 7.0
+}
