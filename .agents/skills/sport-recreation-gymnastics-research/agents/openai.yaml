@@ -1,0 +1,7 @@
+interface:
+  display_name: "ترويح وجمباز للجميع"
+  short_description: "بحث سكوبس من الفكرة حتى مجلة مجانية"
+  default_prompt: "Use $sport-recreation-gymnastics-research to plan or review a recreation or gymnastics-for-all study, check every manuscript section, and nominate free Scopus journals."
+
+policy:
+  allow_implicit_invocation: true
