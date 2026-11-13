@@ -1,0 +1,22 @@
+{
+  "checked_on": "2026-11-13",
+  "product_scope": "promotion_dossier",
+  "single_paper_highest_similarity_max": 0.2,
+  "aggregate_max": 0.4,
+  "tool": "iThenticate",
+  "not_a_universal_manuscript_limit": true,
+  "exemption": "يُعفى من فحص الاقتباس البحث المنشور في مجلة Web of Science من الربع Q1 أو Q2 ضمن SCIE أو SSCI أو AHCI حسب سنة النشر. لا يشمل الإعفاء كشاف ESCI. تصنيف الإعفاء مستقل عن تخصص الباحث في تقرير معامل التأثير.",
+  "sources": [
+    {
+      "title": "فحص الاقتباس، الأسئلة الشائعة، المجلس الأعلى للجامعات",
+      "url": "https://scu.eg/faq_categories/%d9%81%d8%ad%d8%b5-%d8%a7%d9%84%d8%a5%d9%82%d8%aa%d8%a8%d8%a7%d8%b3/"
+    },
+    {
+      "title": "قواعد ونظام عمل اللجان العلمية، الدورة الخامسة عشرة 2025-2028، مادة 30",
+      "url": "https://scu.eg/download/rules-and-regulations-of-the-scientific-committees-15th-term/",
+      "file_url": "https://scu.eg/?wpdmdl=49473",
+      "approved": "الجلسة 766 بتاريخ 2025-08-30"
+    }
+  ],
+  "reread_before_use": "قبل حساب ملف ترقية فعلي، أعد فتح مصدر الأسئلة الشائعة وصفحة قواعد الدورة السارية في الجلسة نفسها. إذا تعذر الفتح، فاذكر أن الأرقام من لقطة 2026-11-13 وليست تحققًا حيًا، ولا تضعها في مقال أو رسالة."
+}

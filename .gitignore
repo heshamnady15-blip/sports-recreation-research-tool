@@ -1,0 +1,4 @@
+dist/
+__pycache__/
+*.pyc
+.agents/skills/scientific-research/assets/researcher-profile.json
