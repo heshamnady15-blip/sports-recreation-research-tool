@@ -233,7 +233,7 @@ def build_manual() -> None:
     add_h(document, "3. الجلسات الست والثلاثون / Thirty-six sessions", 1)
     add_table(
         document,
-        ["#", "الأسبوع", "الدقائق", "النشاط", "Activity", "الاختيار داخل الجلسة / In-session choice", "الجرعة / Dose"],
+        ["#", "الأسبوع / Week", "الدقائق / Minutes", "النشاط", "Activity", "الاختيار داخل الجلسة / In-session choice", "الجرعة / Dose"],
         [
             [
                 str(number),
@@ -632,13 +632,13 @@ def build_sap() -> None:
     add_h(document, "11. قوالب الجداول الفارغة / Empty table shells", 2)
     add_pair(document, "كل الخانات فارغة عمدًا. لا أعداد ولا آثار ولا قيم احتمالية.", "Every cell is intentionally blank. There are no counts, effects, or probability values.")
     shells = [
-        ("جدول 1. الخصائص عند T0 / Table 1. Characteristics at T0", ["المتغير / Characteristic", "التدخل / Intervention", "المقارنة / Comparison", "المجموع / Total"], ["العدد", "العمر", "النوع", "SPPB عند T0", "OPQOL-Brief عند T0", "LSNS-6 عند T0", "توزيع الدور", "فئة الحركة"]),
-        ("جدول 2. السريان / Table 2. Flow", ["البند / Flow item", "التدخل / Intervention", "المقارنة / Comparison", "المجموع / Total"], ["فُحصوا", "مؤهلون", "وافقوا", "خُصصوا", "قياس T0", "أكملوا T1", "أكملوا T2 إن نُفذ", "انسحبوا أو فُقدوا"]),
-        ("جدول 3. النتيجة الأساسية / Table 3. Primary outcome", ["النتيجة / Outcome", "تدخل T0", "تدخل T1", "مقارنة T0", "مقارنة T1", "الفرق المعدل وفترته", "قيمة الاحتمال"], ["مجموع SPPB"]),
-        ("جدول 4. نتائج ثانوية مرشحة / Table 4. Candidate secondary outcomes", ["النتيجة / Outcome", "تدخل T0", "تدخل T1", "مقارنة T0", "مقارنة T1", "الأثر المعدل وفترته"], ["OPQOL-Brief", "LSNS-6 شبكة الأسرة والأصدقاء فقط", "T2 اختياري إن نُفذ"]),
+        ("جدول 1. الخصائص عند T0 / Table 1. Characteristics at T0", ["المتغير / Characteristic", "التدخل / Intervention", "المقارنة / Comparison", "المجموع / Total"], ["العدد / Count", "العمر / Age", "النوع / Sex", "SPPB عند T0 / SPPB at T0", "OPQOL-Brief عند T0 / OPQOL-Brief at T0", "LSNS-6 عند T0 / LSNS-6 at T0", "توزيع الدور / Facility distribution", "فئة الحركة / Mobility category"]),
+        ("جدول 2. السريان / Table 2. Flow", ["البند / Flow item", "التدخل / Intervention", "المقارنة / Comparison", "المجموع / Total"], ["فُحصوا / Screened", "مؤهلون / Eligible", "وافقوا / Consented", "خُصصوا / Allocated", "قياس T0 / T0 assessment", "أكملوا T1 / Completed T1", "أكملوا T2 إن نُفذ / Completed T2 if conducted", "انسحبوا أو فُقدوا / Withdrew or were lost"]),
+        ("جدول 3. النتيجة الأساسية / Table 3. Primary outcome", ["النتيجة / Outcome", "تدخل T0 / Intervention T0", "تدخل T1 / Intervention T1", "مقارنة T0 / Comparison T0", "مقارنة T1 / Comparison T1", "الفرق المعدل وفترته / Adjusted difference and interval", "قيمة الاحتمال / Probability value"], ["مجموع SPPB / Total SPPB"]),
+        ("جدول 4. نتائج ثانوية مرشحة / Table 4. Candidate secondary outcomes", ["النتيجة / Outcome", "تدخل T0 / Intervention T0", "تدخل T1 / Intervention T1", "مقارنة T0 / Comparison T0", "مقارنة T1 / Comparison T1", "الأثر المعدل وفترته / Adjusted effect and interval"], ["OPQOL-Brief", "LSNS-6 شبكة الأسرة والأصدقاء فقط / LSNS-6 family and friend network only", "T2 اختياري إن نُفذ / Optional T2 if conducted"]),
         ("جدول 5. التنفيذ / Table 5. Delivery", ["المؤشر / Indicator", "التدخل / Intervention", "المقارنة / Comparison", "التعريف / Definition"], ["جلسات مخططة / Planned sessions", "جلسات متاحة فعلًا / Sessions actually available", "نسبة الحضور = الجلسات المتاحة التي حُضرت ÷ الجلسات المتاحة فعلًا. عند عرض كل الجلسات المخططة: المقام = الملتحقون × 36 / Attendance proportion = available sessions attended ÷ sessions actually available. When every planned session is offered: denominator = enrolled count × 36", "التزام المكونات = المنفذة ÷ المخططة للجلسة المنفذة / Component adherence = delivered ÷ planned for the delivered session", "متوسط الدقائق / Mean minutes", "انحرافات / Deviations", "أحداث / Events", "أحداث خطيرة / Serious events"]),
-        ("جدول 6. الفقد / Table 6. Missingness", ["المقياس والزمن / Measure and time", "نقص التدخل", "نقص المقارنة", "الأسباب"], ["SPPB T0", "SPPB T1", "تعذر أداء SPPB حسب الدليل", "OPQOL-Brief T1", "LSNS-6 T1", "T2 اختياري"]),
-        ("جدول 7. الحساسية / Table 7. Sensitivity", ["التحليل / Analysis", "الافتراض / Assumption", "الأثر المعدل", "القراءة"], ["النموذج المقفَل لاحقًا", "قياسات مكتملة", "حساسية الفقد", "طريقة تجمع بديلة عند عدد قليل من الدور / Alternative clustering method when the number of facilities is small", "تحليل per-protocol: العتبة معلّقة حتى اعتماد الجرعة وليس تحليلًا تأكيديًا / Per-protocol analysis: threshold pending until the dose is adopted and not a confirmatory analysis"]),
+        ("جدول 6. الفقد / Table 6. Missingness", ["المقياس والزمن / Measure and time", "نقص التدخل / Missing in intervention", "نقص المقارنة / Missing in comparison", "الأسباب / Reasons"], ["SPPB T0", "SPPB T1", "تعذر أداء SPPB حسب الدليل / SPPB unable to perform per the instrument rules", "OPQOL-Brief T1", "LSNS-6 T1", "T2 اختياري / Optional T2"]),
+        ("جدول 7. الحساسية / Table 7. Sensitivity", ["التحليل / Analysis", "الافتراض / Assumption", "الأثر المعدل / Adjusted effect", "القراءة / Reading"], ["النموذج المقفَل لاحقًا / Model locked later", "قياسات مكتملة / Complete measurements", "حساسية الفقد / Missingness sensitivity", "طريقة تجمع بديلة عند عدد قليل من الدور / Alternative clustering method when the number of facilities is small", "تحليل per-protocol: العتبة معلّقة حتى اعتماد الجرعة وليس تحليلًا تأكيديًا / Per-protocol analysis: threshold pending until the dose is adopted and not a confirmatory analysis"]),
     ]
     for title, headers, labels in shells:
         add_h(document, title, 3)
