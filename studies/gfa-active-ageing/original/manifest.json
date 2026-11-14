@@ -1,0 +1,22 @@
+{
+  "project": "GfA Active Ageing",
+  "status": "draft",
+  "files": [
+    {
+      "path": "intervention/GfA_Active_Ageing_Bilingual_Intervention_Manual.docx",
+      "sha256": "bd77baa32a76e504d83f2e15bed0d151b5b52c21f544629acb40b1a5824d4b86"
+    },
+    {
+      "path": "pilot-study/GfA_Active_Ageing_Pilot_Protocol_Step21_AR_EN.docx",
+      "sha256": "2010c382c5f8f33d1dcf702b01b1f95c67cdf237ad1db0e3376043e04cd0c6e2"
+    },
+    {
+      "path": "measurement/GfA_Expert_Validation_Forms_AR_EN.docx",
+      "sha256": "860ee7401f07b8a2ecad8fb36dd534d3ff80e225ce0e0d14bf72cf7979704bbe"
+    },
+    {
+      "path": "statistics/GfA_Active_Ageing_SAP_Step24_AR_EN.docx",
+      "sha256": "231c9242c94cf37d9c02aa9d4317a8c47b46cb60095df81d76afb059d0fe8e11"
+    }
+  ]
+}
