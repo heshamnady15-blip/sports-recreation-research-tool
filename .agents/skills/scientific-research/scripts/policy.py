@@ -320,6 +320,23 @@ def main(argv: list[str] | None = None) -> int:
     review.add_argument("--path", required=True)
     review.add_argument("--section", action="append", required=True)
 
+    verify_refs = sub.add_parser("verify-references")
+    verify_refs.add_argument("--path", required=True)
+    verify_refs.add_argument("--offline", action="store_true")
+
+    verify_journal = sub.add_parser("verify-journal")
+    verify_journal.add_argument("--path", required=True)
+    verify_journal.add_argument("--offline", action="store_true")
+
+    audit_methods_cmd = sub.add_parser("audit-methods")
+    audit_methods_cmd.add_argument("--path", required=True)
+
+    audit = sub.add_parser("audit")
+    audit.add_argument("--references")
+    audit.add_argument("--journal")
+    audit.add_argument("--manuscript")
+    audit.add_argument("--offline", action="store_true")
+
     args = parser.parse_args(argv)
     if args.command == "journal":
         _print_json(
@@ -358,6 +375,40 @@ def main(argv: list[str] | None = None) -> int:
         issues = review_issues(text, args.section)
         _print_json({"ok": not issues, "issues": issues})
         return 0 if not issues else 1
+    if args.command in {"verify-references", "verify-journal", "audit-methods", "audit"}:
+        from verify_v2 import build_audit_report
+
+        def unreachable(doi: str) -> dict:
+            return {"found": None, "source": "offline", "error": "offline"}
+
+        def unreachable_fetch(url: str) -> dict:
+            return {"status": None, "body": "", "error": "offline"}
+
+        lookup = unreachable if getattr(args, "offline", False) else None
+        fetch = unreachable_fetch if getattr(args, "offline", False) else None
+        references = journal = manuscript = None
+        if args.command == "verify-references":
+            references = load_json(Path(args.path))
+        elif args.command == "verify-journal":
+            journal = load_json(Path(args.path))
+        elif args.command == "audit-methods":
+            manuscript = Path(args.path).read_text(encoding="utf-8")
+        else:
+            if args.references:
+                references = load_json(Path(args.references))
+            if args.journal:
+                journal = load_json(Path(args.journal))
+            if args.manuscript:
+                manuscript = Path(args.manuscript).read_text(encoding="utf-8")
+        report = build_audit_report(
+            references=references,
+            journal=journal,
+            manuscript=manuscript,
+            lookup=lookup,
+            fetch=fetch,
+        )
+        _print_json(report)
+        return 0 if report["passed"] else 1
     return 2
 
 

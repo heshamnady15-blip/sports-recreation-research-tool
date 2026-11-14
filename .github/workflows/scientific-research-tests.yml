@@ -1,0 +1,21 @@
+name: scientific-research tests
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  skill-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Run scientific-research skill tests offline
+        run: python3 -m unittest tests.test_scientific_research tests.test_scientific_research_v2
