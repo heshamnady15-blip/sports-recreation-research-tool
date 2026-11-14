@@ -110,13 +110,37 @@ def design_block(document: Document) -> None:
     add_h(document, "التصميم المنفذ / Executed design", 2)
     add_pair(
         document,
-        "التصميم المنفذ: غير مسمى في هذا الإصدار. التصميمات البديلة ثلاثة، ويُسمى لاحقًا تصميم بديل واحد فقط بعد معرفة عدد دور الرعاية: تخصيص على مستوى الشخص، أو تخصيص على مستوى الدار، أو مقارنة مضبوطة غير عشوائية. هذه المسودة لا تعتمد أي تصميم بديل تصميمًا منفذًا، وليست تجربة عشوائية.",
-        "Executed design: not named in this version. Three alternative designs exist, and exactly one alternative design may be named later, after the number of care facilities is known: individual-level randomization, cluster-randomization by facility, or a quasi-experimental controlled comparison. This draft names no alternative design as executed, and it is not a randomized trial.",
+        "التصميم المنفذ: غير مسمى في هذا الإصدار. توجد ثلاثة تصميمات بديلة، ويُسمى لاحقًا تصميم بديل واحد فقط بعد معرفة عدد دور الرعاية وإمكاناتها الميدانية: تخصيص عشوائي على مستوى الشخص، أو تخصيص عشوائي عنقودي على مستوى الدار، أو مقارنة شبه تجريبية مضبوطة. هذه المسودة لا تعتمد أي تصميم بديل تصميمًا منفذًا، وليست تجربة عشوائية.",
+        "Executed design: not named in this version. Three alternative designs exist, and exactly one alternative design may be named later, after the number of care facilities and their field feasibility are known: individual-level randomization, cluster-randomization by facility, or a quasi-experimental controlled comparison. This draft names no alternative design as executed, and it is not a randomized trial.",
+    )
+    add_pair(
+        document,
+        "تعمية مقيمي النتائج مطلوبة إذا اعتُمد لاحقًا أي تصميم بديل من الثلاثة: التخصيص العشوائي على مستوى الشخص، والتخصيص العشوائي العنقودي على مستوى الدار، والمقارنة شبه التجريبية المضبوطة. الإجراء معلّق ولم يُنفذ. انكشاف التخصيص أو تعذر التعمية يُوثق كتابة: من انكشفت له المعلومة، ومتى، وما المعلومة، وأي قياسات تأثرت، ولماذا تعذرت التعمية. هذا التوثيق بلا تصوير وبلا تسجيل صوتي أو مرئي.",
+        "Outcome-assessor blinding is required if any one of the three alternative designs is later adopted: individual-level randomization, cluster-randomization by facility, and the quasi-experimental controlled comparison. The procedure is pending and has not been carried out. Allocation unblinding, or an inability to blind, is documented in writing: who learned the allocation, when, what information was revealed, which assessments were affected, and why blinding could not be maintained. That record uses no photography and no audio or video.",
     )
     add_pair(
         document,
         "مجموعة المقارنة موجودة في الخطة: أنشطة اجتماعية منظمة من دون التمرين الوظيفي المخطط. فصل المكان والزمن بين المجموعتين معلّق حتى تُعرف الدور.",
         "A comparison group is in the plan: structured social activities without the planned functional exercise. Place and time separation between the groups is pending until the facilities are known.",
+    )
+
+
+def attendance_block(document: Document) -> None:
+    add_h(document, "معادلات الحضور والالتزام / Attendance and adherence equations", 2)
+    add_pair(
+        document,
+        "الجلسات المخططة للبرنامج الكامل: 36 جلسة لكل شخص ملتحق. الجلسة المتاحة فعلًا هي جلسة مخططة عُرضت على الشخص وهو ما زال ملتحقًا وقادرًا على تلقي العرض. الجلسة الملغاة، أو الجلسة بعد الانسحاب، ليست جلسة متاحة فعلًا.",
+        "Planned sessions for the full program: 36 sessions for each enrolled person. A session actually available is a planned session offered to the person while that person was still enrolled and able to receive the offer. A cancelled session, or a session after withdrawal, is not a session actually available.",
+    )
+    add_pair(
+        document,
+        "نسبة الحضور = الجلسات المتاحة التي حُضرت ÷ الجلسات المتاحة فعلًا. إذا عُرضت كل الجلسات المخططة على كل الملتحقين، صار المقام = عدد الملتحقين × 36.",
+        "Attendance proportion = available sessions attended ÷ sessions actually available. When every planned session is offered to every enrolled person, the denominator equals the enrolled count × 36.",
+    )
+    add_pair(
+        document,
+        "نسبة التزام المكونات في جلسة نُفذت = المكونات الأساسية المنفذة ÷ المكونات الأساسية المخططة لتلك الجلسة. المدة تُسجل منفصلة عن الحضور. عتبة تحليل per-protocol معلّقة حتى اعتماد الجرعة، وهذا التحليل ليس تحليلًا تأكيديًا.",
+        "Component adherence for a delivered session = core components delivered ÷ core components planned for that session. Duration is recorded separately from attendance. The per-protocol threshold stays pending until the dose is adopted, and that analysis is not a confirmatory analysis.",
     )
 
 
@@ -153,8 +177,8 @@ def pending_items() -> list[str]:
         "عتبة الالتزام لأي تحليل لاحق وفق البروتوكول / Adherence threshold for any later per-protocol analysis",
         "نسخ الأدوات وتراخيصها وتصحيحها، وأداة الترابط داخل الدار إن اختيرت لاحقًا / Instrument versions, licences, scoring, and a within-facility connectedness instrument if one is later chosen",
         "فصل المكان والزمن لمنع التلوث / Place and time separation for contamination control",
-        "وجود مرحلة بناء تشاركي قبل الجلسات الست والثلاثين / Whether a co-design phase will exist before the 36 sessions",
-        "إجراءات تعمية المقيم وإخفاء التخصيص / Assessor-blinding and allocation-concealment procedures",
+        "تنفيذ مرحلة البناء التشاركي المقترحة: البروتوكول مكتوب والتنفيذ لم يبدأ / Conduct of the proposed co-design phase: the protocol is written and delivery has not started",
+        "تنفيذ تعمية مقيمي النتائج وتوثيق أي انكشاف: القاعدة مكتوبة والتنفيذ لم يبدأ / Carrying out outcome-assessor blinding and any unblinding record: the rule is written and has not been carried out",
         "تنفيذ T2 في الأسبوع 20 / Whether T2 at week 20 is conducted",
         "مجموعة المتغيرات الضابطة / Covariate set",
         "اختيار الخبراء وجمع تقديراتهم / Expert selection and collection of ratings",
@@ -176,8 +200,8 @@ def build_manual() -> None:
     add_h(document, "1. الإطار البحثي / Research framework", 1)
     add_pair(
         document,
-        "هذا الدليل يصف الجلسات الست والثلاثين للاستطلاع وللدراسة المقارنة اللاحقة. الاستطلاع لا يثبت الفاعلية. الاختيار داخل الجلسة جزء من التنفيذ، وليس مرحلة بناء تشاركي سابقة. مرحلة البناء السابقة غير موثقة هنا ومعلّقة.",
-        "This manual specifies the 36 sessions for the pilot and for the later comparative study. The pilot does not establish effectiveness. Choice during a session is part of delivery. A prior co-design phase is not documented here and remains pending.",
+        "هذا الدليل يصف الجلسات الست والثلاثين للاستطلاع وللدراسة المقارنة اللاحقة. الاستطلاع لا يثبت الفاعلية. الاختيار داخل الجلسة جزء من التنفيذ. مرحلة البناء التشاركي السابقة بروتوكول مقترح مستقل في الملف GfA_Active_Ageing_CoDesign_Phase_Protocol_v2.1، ولم تبدأ، ولا تغني عن مجموعة المقارنة.",
+        "This manual specifies the 36 sessions for the pilot and for the later comparative study. The pilot does not establish effectiveness. Choice during a session is part of delivery. The prior co-design phase has its own proposed protocol in GfA_Active_Ageing_CoDesign_Phase_Protocol_v2.1. It has not started, and it does not replace the comparison group.",
     )
     add_table(
         document,
@@ -253,24 +277,20 @@ def build_manual() -> None:
     )
     add_pair(
         document,
-        "تعمية المقيم وإخفاء التخصيص إجراءان معلّقان. لا تصوير ولا تسجيل صوتي أو مرئي. الملاحظات المكتوبة فقط هي سجل التقبل في الاستطلاع.",
-        "Assessor blinding and allocation concealment are pending procedures. There is no photography and no audio or video recording. Written notes are the only pilot acceptability record.",
+        "لا تصوير ولا تسجيل صوتي أو مرئي. الملاحظات المكتوبة فقط هي سجل التقبل في الاستطلاع. تعمية مقيمي النتائج وتوثيق الانكشاف هما القاعدة الواردة في قسم التصميم المنفذ، وهما معلّقان ولم يُنفذا.",
+        "There is no photography and no audio or video recording. Written notes are the only pilot acceptability record. Outcome-assessor blinding and the unblinding record are the rule in the executed-design section. Assessor blinding is pending and has not been carried out.",
     )
-    add_pair(
-        document,
-        "الالتزام يسجل المكونات المخططة والمنفذة والمدة منفصلة عن الحضور. تحليل وفق البروتوكول غير معرّف لأن عتبة الالتزام معلّقة مع الجرعة.",
-        "Fidelity records planned components, delivered components, and duration separately from attendance. A per-protocol analysis is not defined because the adherence threshold is pending together with the dose.",
-    )
+    attendance_block(document)
     add_h(document, "6. الاستمارات الفارغة / Blank forms", 1)
     forms = [
-        ("GFA-01 تنفيذ الجلسة / Session delivery", ["الدار / Facility", "التاريخ / Date", "رقم الجلسة / Session index", "الميسر / Facilitator", "المدة المخططة / Planned duration", "المدة الفعلية / Actual duration", "الحضور / Attendance", "المكونات المخططة / Planned components", "المكونات المنفذة / Delivered components", "الاختيار داخل الجلسة / In-session choice", "التعديلات / Adaptations", "أحداث السلامة / Safety events", "ملاحظات / Notes"]),
-        ("GFA-02 متابعة فردية / Individual participation", ["الرمز / Code", "الجلسة / Session", "الحضور / Attendance", "دقائق المشاركة / Participation minutes", "جلوس أو دعم أو وقوف / Seated, supported, or standing", "الراحة / Rest breaks", "سبب الغياب أو التوقف / Reason for absence or stop", "ملاحظات / Notes"]),
+        ("GFA-01 تنفيذ الجلسة / Session delivery", ["الدار / Facility", "التاريخ / Date", "رقم الجلسة / Session index", "الميسر / Facilitator", "المدة المخططة / Planned duration", "المدة الفعلية / Actual duration", "جلسات البرنامج المخططة / Planned program sessions: 36 for the full program", "هل هذه الجلسة متاحة فعلًا؟ / Was this session actually available?", "الحضور من الجلسات المتاحة / Attendance among sessions actually available", "المكونات المخططة / Planned components", "المكونات المنفذة / Delivered components", "التزام المكونات = المنفذة ÷ المخططة لهذه الجلسة المنفذة / Component adherence = delivered ÷ planned for this delivered session", "الاختيار داخل الجلسة / In-session choice", "التعديلات / Adaptations", "أحداث السلامة / Safety events", "ملاحظات / Notes"]),
+        ("GFA-02 متابعة فردية / Individual participation", ["الرمز / Code", "الجلسة / Session", "هل الجلسة مخططة لهذا الشخص؟ / Was the session planned for this person?", "هل الجلسة متاحة فعلًا لهذا الشخص؟ / Was the session actually available to this person?", "هل حضر الجلسة المتاحة؟ / Attended the available session?", "دقائق المشاركة / Participation minutes", "جلوس أو دعم أو وقوف / Seated, supported, or standing", "الراحة / Rest breaks", "سبب الغياب أو التوقف أو عدم الإتاحة / Reason for absence, stop, or unavailability", "ملاحظات / Notes"]),
         ("GFA-03 حدث ضار / Adverse event", ["رمز الحدث / Event code", "رمز الشخص / Person code", "التاريخ والوقت / Date and time", "الوصف / Description", "النشاط وقت الحدث / Activity at the time", "الإجراء الفوري / Immediate response", "مراجعة المختص / Health-professional review", "الشدة / Severity", "المتابعة / Follow-up", "حالة الإبلاغ / Reporting status"]),
-        ("GFA-04 الالتزام / Fidelity", ["الجلسة / Session", "المخطط / Planned", "المنفذ / Delivered", "المدة / Duration", "الموسيقى / Music", "الاختيار داخل الجلسة / In-session choice", "التعديلات / Modifications", "الانحرافات / Deviations", "المراجع / Reviewer", "حالة الجرعة / Dose status: pending"]),
+        ("GFA-04 الالتزام / Fidelity", ["الجلسة / Session", "المخطط / Planned", "المنفذ / Delivered", "المدة / Duration", "الموسيقى / Music", "الاختيار داخل الجلسة / In-session choice", "التعديلات / Modifications", "الانحرافات / Deviations", "المراجع / Reviewer", "حالة الجرعة / Dose status: pending", "عتبة per-protocol معلّقة وليست تحليلًا تأكيديًا / Per-protocol threshold pending and not a confirmatory analysis"]),
         ("GFA-05 الاختيار داخل الجلسة / In-session choice", ["الجلسة / Session", "خيارات الحركة / Movement options", "خيارات الموسيقى / Music options", "خيارات التشكيل / Formation options", "ما اختير / What was chosen", "ما لم يُعتمد وسببه / What was not adopted and why"]),
         ("GFA-06 المقارنة / Comparison", ["الدار / Facility", "التاريخ / Date", "الجلسة / Session", "النشاط الاجتماعي / Social activity", "الدقائق المخططة والفعلية / Planned and actual minutes", "الحضور / Attendance", "زمن التواصل / Facilitator contact", "تلوث حركي؟ / Movement contamination?", "الانحرافات / Deviations"]),
         ("GFA-07 التقبل / Acceptability", ["الرمز / Code", "التاريخ / Date", "سجل التقبل المعتمد للاستطلاع: ملاحظات مكتوبة فقط / Pilot acceptability record: written notes only", "بنود 1–5 للمتعة والملاءمة والصوت في القرار والتفاعل والرغبة في الاستمرار: مسودة غير معتمدة وليست نتيجة تحليل / Draft 1–5 items for enjoyment, suitability, voice, interaction, and willingness to continue: unvalidated and not an analysis outcome"]),
-        ("GFA-08 سجل القياس / Measurement log", ["الرمز / Code", "المجموعة / Group", "تاريخ T0 / T0 date", "تاريخ T1 / T1 date", "تاريخ T2 إن نُفذ / T2 date if conducted", "حالة SPPB: مكتمل أو تعذر أداء حسب دليل الأداة أو غياب / SPPB status: complete, unable to perform per the instrument rules, or absent", "حالة OPQOL-Brief / OPQOL-Brief status", "حالة LSNS-6 / LSNS-6 status", "سبب النقص / Missingness reason", "رمز المقيم / Assessor code", "حالة تعمية المقيم: معلّقة / Assessor-blinding status: pending", "حالة إخفاء التخصيص: معلّقة / Allocation-concealment status: pending", "نسخة الأداة وترخيصها: معلّقان / Instrument version and licence: pending"]),
+        ("GFA-08 سجل القياس / Measurement log", ["الرمز / Code", "المجموعة / Group", "تاريخ T0 / T0 date", "تاريخ T1 / T1 date", "تاريخ T2 إن نُفذ / T2 date if conducted", "حالة SPPB: مكتمل أو تعذر أداء حسب دليل الأداة أو غياب / SPPB status: complete, unable to perform per the instrument rules, or absent", "حالة OPQOL-Brief / OPQOL-Brief status", "حالة LSNS-6 / LSNS-6 status", "سبب النقص / Missingness reason", "رمز المقيم / Assessor code", "حالة تعمية المقيم: معلّقة / Assessor-blinding status: pending", "حالة إخفاء التخصيص: معلّقة / Allocation-concealment status: pending", "توثيق الانكشاف أو تعذر التعمية: من، ومتى، وما المعلومة، وأي قياسات، ولماذا / Unblinding or inability-to-blind record: who, when, what, which assessments, why", "نسخة الأداة وترخيصها: معلّقان / Instrument version and licence: pending"]),
     ]
     for title, fields in forms:
         add_h(document, title, 2)
@@ -327,16 +347,16 @@ def build_pilot() -> None:
     add_p(document, "مؤشرات الاستطلاع هي الاستقطاب، والاحتفاظ حتى الأسبوع 12، والحضور، واكتمال SPPB بين المؤهلين، واكتمال الاستبيانين، والتزام الميسر، والملاحظات المكتوبة للتقبل، والسلامة. سجل التقبل في الاستطلاع ملاحظات مكتوبة فقط. بنود الدرجات في GFA-07 مسودة غير معتمدة وليست مؤشرًا.")
     add_h(document, "تعريفات المقامات", 2)
     add_p(document, "مقام الاحتفاظ هو عدد الملتحقين. بسطه من بقي في الأسبوع 12.")
-    add_p(document, "مقام الحضور هو مجموع الجلسات المعروضة على الملتحقين. عند عرض البرنامج كاملًا يكون المقام مساويًا لعدد الملتحقين مضروبًا في 36. البسط هو الجلسات التي حضرها الشخص.")
+    attendance_block(document)
     add_p(document, "مقام الاستبيانات عند T1 هو عدد الملتحقين مضروبًا في أداتين: OPQOL-Brief وLSNS-6. البسط هو الاستمارات القابلة للتصحيح. إضافة T2 معلّقة وتغير المقام إذا اعتُمدت.")
     add_p(document, "مقام اكتمال SPPB هو عدد المؤهلين للتقييم حسب قواعد الأداة بعد اعتمادها. من يتعذر عليه الأداء حسب دليل الأداة لا يُحسب غيابًا عشوائيًا. قواعد الأهلية معلّقة.")
     add_h(document, "العينة والتحليل", 2)
     add_p(document, "حجم الاستطلاع معلّق. يُبرر لاحقًا بدقة نسب الجدوى وعدد الدور والتصميم بعد حسمه والانسحاب المتوقع. أثر استطلاعي لا يُستخدم وحده لتقدير حجم الدراسة اللاحقة.")
-    add_p(document, "التحليل وصفي: أعداد ونسب ومقاماتها وفواصل ثقة مناسبة، وأسباب الفقد والانسحاب والانحراف والأحداث. لا اختبار تأكيدي للفاعلية. إذا حُسم لاحقًا تصميم على مستوى الدار، يراعى التجمع في وصف الجدوى أيضًا.")
+    add_p(document, "التحليل وصفي: أعداد ونسب ومقاماتها وفواصل ثقة مناسبة، وأسباب الفقد والانسحاب والانحراف والأحداث. لا اختبار تأكيدي للفاعلية. إذا سُمي لاحقًا التخصيص العشوائي العنقودي على مستوى الدار، يراعى التجمع في وصف الجدوى أيضًا. تحليل per-protocol ليس تحليلًا تأكيديًا.")
     add_h(document, "العتبات الأولية للانتقال", 2)
     add_p(document, "عتبات أولية غير معتمدة: الاحتفاظ 85% أو أكثر، اكتمال SPPB بين المؤهلين 90% أو أكثر، الحضور 80% أو أكثر، اكتمال الاستبيانات 85% أو أكثر. تبقى معلّقة حتى مراجعة الخبراء ومعلومات السلامة والتصميم. لا تُستخدم وحدها لقرار الانتقال.")
     add_h(document, "السلامة", 2)
-    add_p(document, "يُوقف النشاط عند ألم صدري أو دوار شديد أو ضيق نفس غير معتاد أو اضطراب اتزان مقلق. خطة الطوارئ والإبلاغ معلّقة. تعمية المقيم وإخفاء التخصيص معلّقان.")
+    add_p(document, "يُوقف النشاط عند ألم صدري أو دوار شديد أو ضيق نفس غير معتاد أو اضطراب اتزان مقلق. خطة الطوارئ والإبلاغ معلّقة. تعمية مقيمي النتائج وتوثيق انكشاف التخصيص أو تعذر التعمية هما القاعدة في فقرة التصميم المنفذ، وهما معلّقان ولم يُنفذا.")
     add_h(document, "B. English protocol", 1)
     add_p(document, "Title: pilot feasibility study of a Gymnastics for All recreational program, with in-session choice, among men and women aged 60–75 living in Cairo residential care facilities.")
     add_p(document, "Purpose: estimate recruitment, retention, attendance, measurement completion, fidelity, written acceptability, and safety. The pilot does not establish efficacy.")
@@ -345,13 +365,15 @@ def build_pilot() -> None:
     add_p(document, "Comparator: structured social activities without intended functional exercise, with contact time matched as far as practical. Usual care and outside activity are logged. Place and time separation is pending.")
     add_p(document, "Feasibility endpoints: recruitment, retention to week 12, attendance, SPPB completion among people eligible for assessment, completion of the two questionnaires, facilitator fidelity, written acceptability notes, and safety. Written notes are the only pilot acceptability record. The 1–5 draft items on GFA-07 are not an endpoint.")
     add_p(document, "Retention denominator: enrolled count. Numerator: still in the study at week 12.")
-    add_p(document, "Attendance denominator: offered sessions summed across the enrolled count. For a full program the denominator equals the enrolled count multiplied by 36. Numerator: sessions attended.")
+    add_p(document, "Planned sessions for the full program: 36 sessions for each enrolled person. A session actually available is a planned session offered while the person was still enrolled and able to receive the offer. A cancelled session, or a session after withdrawal, is not a session actually available.")
+    add_p(document, "Attendance proportion = available sessions attended ÷ sessions actually available. When every planned session is offered to every enrolled person, the denominator equals the enrolled count multiplied by 36.")
+    add_p(document, "Component adherence for a delivered session = core components delivered ÷ core components planned for that session. The per-protocol threshold stays pending until the dose is adopted, and that analysis is not a confirmatory analysis.")
     add_p(document, "T1 questionnaire denominator: enrolled count multiplied by two instruments, OPQOL-Brief and LSNS-6. Numerator: scorable forms. Adding T2 is pending and would change the denominator.")
     add_p(document, "SPPB completion denominator: count eligible for assessment under the instrument rules once those rules are adopted. Inability to perform, scored by those rules, is not treated as an ordinary absence. Eligibility rules are pending.")
     add_p(document, "Pilot sample size is pending. It will be justified from the precision of feasibility proportions, the facility count, the design after it is named, and expected attrition. An unstable pilot efficacy estimate is not the sole basis for the later sample size.")
-    add_p(document, "Analysis is descriptive, with counts, proportions, denominators, and suitable confidence intervals, plus reasons for missingness, withdrawal, deviation, and adverse events. There is no confirmatory efficacy test. If facility-level assignment is later named, clustering is also respected in the feasibility description.")
+    add_p(document, "Analysis is descriptive, with counts, proportions, denominators, and suitable confidence intervals, plus reasons for missingness, withdrawal, deviation, and adverse events. There is no confirmatory efficacy test. If cluster-randomization by facility is later named, clustering is also respected in the feasibility description. A per-protocol analysis is not a confirmatory analysis.")
     add_p(document, "Provisional progression thresholds, not adopted: retention at least 85 percent, eligible SPPB completion at least 90 percent, attendance at least 80 percent, questionnaire completion at least 85 percent. They stay pending expert review and safety and design information. They are not used alone.")
-    add_p(document, "Stop activity for chest pain, marked dizziness, unusual breathlessness, or concerning instability. The emergency and reporting plan is pending. Assessor blinding and allocation concealment are pending.")
+    add_p(document, "Stop activity for chest pain, marked dizziness, unusual breathlessness, or concerning instability. The emergency and reporting plan is pending. Outcome-assessor blinding and the written unblinding record follow the executed-design section. Assessor blinding is pending and has not been carried out.")
     add_h(document, "C. Readiness checklist PILOT-R01", 1)
     add_p(document, "Blank form. Mark Yes, No, or Pending. Attach evidence only when it exists. This draft marks no item Yes.")
     add_table(
@@ -382,7 +404,7 @@ def build_pilot() -> None:
         [
             ["الاحتفاظ حتى الأسبوع 12 / Retention to week 12", "_____", "الملتحقون / Enrolled count _____", "85% أو أكثر / at least 85%"],
             ["اكتمال SPPB / SPPB completion", "_____", "المؤهلون للتقييم / Eligible for assessment _____", "90% أو أكثر / at least 90%"],
-            ["الحضور / Attendance", "_____", "الملتحقون × 36 عند البرنامج الكامل / Enrolled count × 36 when the full program is offered", "80% أو أكثر / at least 80%"],
+            ["الحضور / Attendance", "الجلسات المتاحة التي حُضرت / Available sessions attended _____", "الجلسات المتاحة فعلًا. عند عرض كل المخطط: الملتحقون × 36 / Sessions actually available. When every planned session is offered: enrolled count × 36", "80% أو أكثر / at least 80%"],
             ["اكتمال الاستبيانات عند T1 / T1 questionnaire completion", "_____", "الملتحقون × 2 / Enrolled count × 2", "85% أو أكثر / at least 85%"],
             ["الأحداث الضارة / Adverse events", "العدد / Count _____", "جلسات التعرض / Exposure sessions _____", "مراجعة مستقلة / Independent review"],
         ],
@@ -418,7 +440,7 @@ def build_pilot() -> None:
         [
             ["الاحتفاظ / Retention", "17/20 = 85%", "يلامس المستهدف الأولي في المثال فقط / Meets the provisional target in the example only"],
             ["اكتمال SPPB / SPPB completion", "16/18 = 88.9%", "دون 90% في المثال فقط / Below 90% in the example only"],
-            ["الحضور / Attendance", "576/(20×36) = 576/720 = 80%", "المقام 720 يساوي 20 مضروبة في 36، لا 600 / The denominator 720 is 20 times 36, not 600"],
+            ["الحضور / Attendance", "576/(20×36) = 576/720 = 80%", "المثال يفترض أن كل الجلسات المخططة كانت متاحة فعلًا، فيساوي المقام 20 × 36 = 720، لا 600 / The example assumes every planned session was actually available, so the denominator is 20 × 36 = 720, not 600"],
             ["الاستبيانات / Questionnaires", "33/(20×2) = 33/40 = 82.5%", "دون 85% في المثال فقط / Below 85% in the example only"],
         ],
     )
@@ -456,6 +478,7 @@ def build_expert() -> None:
         "عتبة اكتمال SPPB الأولية 90% / Provisional eligible SPPB completion threshold 90%",
         "عتبة الحضور الأولية 80% / Provisional attendance threshold 80%",
         "عتبة الاستبيانات الأولية 85% / Provisional questionnaire threshold 85%",
+        "تعمية مقيمي النتائج وتوثيق الانكشاف في التصميمات البديلة الثلاثة، من غير اعتماد تصميم بديل منفذ / Outcome-assessor blinding and the unblinding record for the three alternative designs, with no alternative design adopted as executed",
     ]
     add_pair(
         document,
@@ -551,24 +574,24 @@ def build_sap() -> None:
     add_h(document, "3. مجموعات التحليل / Analysis sets", 2)
     add_pair(
         document,
-        "إذا اعتُمد لاحقًا تخصيص عشوائي، فالمجموعة الأساسية تتبع التخصيص الأصلي مع خطة الفقد المقفلة. تحليل الالتزام لا يحل محلها. تحليل per-protocol غير معرّف الآن لأن عتبة الالتزام معلّقة. إذا اعتُمدت مقارنة غير عشوائية، تُحدد المجموعة بالتعرض المسجل ومعايير الأهلية، ولا تُسمى تحليلًا حسب النية.",
-        "If random assignment is later adopted, the primary set follows the original assignment together with the locked missing-data plan. An adherence analysis does not replace it. A per-protocol analysis is not defined because the adherence threshold is pending. If a nonrandom comparison is adopted, the set is defined by recorded exposure and eligibility, and it is not named an intention-to-treat analysis.",
+        "إذا اعتُمد لاحقًا تخصيص عشوائي، فالمجموعة الأساسية تتبع التخصيص الأصلي مع خطة الفقد المقفلة. نسبة التزام المكونات وصفية ولا تحل محلها. تحليل per-protocol غير معرّف الآن لأن عتبة الالتزام معلّقة حتى اعتماد الجرعة، وهو ليس تحليلًا تأكيديًا. إذا اعتُمدت المقارنة شبه التجريبية المضبوطة، تُحدد المجموعة بالتعرض المسجل ومعايير الأهلية، ولا تُسمى تحليلًا حسب النية.",
+        "If random assignment is later adopted, the primary set follows the original assignment together with the locked missing-data plan. Component adherence is descriptive and does not replace it. A per-protocol analysis is not defined because the adherence threshold is pending until the dose is adopted, and that analysis is not a confirmatory analysis. If the quasi-experimental controlled comparison is adopted, the set is defined by recorded exposure and eligibility, and it is not named an intention-to-treat analysis.",
     )
     add_h(document, "4. نماذج مشروطة بتصميم بديل واحد / Models conditional on one alternative design", 2)
     add_pair(
         document,
-        "إذا كان التصميم البديل المعتمد لاحقًا تخصيصًا عشوائيًا على مستوى الشخص: انحدار يضبط SPPB عند T0، مع تعمية المقيم وإخفاء التخصيص. الإجراءان معلّقان ولم يُنفذا. إذا تكرر الأشخاص داخل الدار يراعى ذلك في الاستدلال.",
-        "If the alternative design later adopted is individual-level randomization: regression adjusted for SPPB at T0, with assessor blinding and allocation concealment. Both procedures are pending and have not been carried out. If several people share a facility, inference respects that dependence.",
+        "إذا كان التصميم البديل المعتمد لاحقًا تخصيصًا عشوائيًا على مستوى الشخص: انحدار يضبط SPPB عند T0. مقيمو النتائج يُعمون عن التخصيص، ويُوثق انكشاف التخصيص أو تعذر التعمية كتابة. الإجراء معلّق ولم يُنفذ. إذا تكرر الأشخاص داخل الدار يراعى ذلك في الاستدلال.",
+        "If the alternative design later adopted is individual-level randomization: regression adjusted for SPPB at T0. Outcome assessors are blinded to allocation, and allocation unblinding or an inability to blind is documented in writing. The procedure is pending and has not been carried out. If several people share a facility, inference respects that dependence.",
     )
     add_pair(
         document,
-        "إذا كان التصميم البديل المعتمد لاحقًا تخصيصًا عشوائيًا على مستوى الدار: نموذج يضبط القياس القبلي مع استدلال يراعي التجمع وعدد الدور الفعلي، بما في ذلك تصغير عدد الدور. لا يُستخدم نموذج مختلط تقليدي وحده عند قلة الدور من غير تقييمه.",
-        "If the alternative design later adopted is cluster-randomization by facility: a baseline-adjusted model with inference that respects clustering and the actual number of facilities, including a small number of facilities. A conventional mixed model is not used alone for few facilities without assessing it.",
+        "إذا كان التصميم البديل المعتمد لاحقًا تخصيصًا عشوائيًا عنقوديًا على مستوى الدار: نموذج يضبط القياس القبلي مع استدلال يراعي التجمع وعدد الدور الفعلي، بما في ذلك عندما يكون عدد الدور قليلًا. لا يُستخدم نموذج مختلط تقليدي وحده عند عدد قليل من الدور من غير تقييمه. مقيمو النتائج يُعمون عن التخصيص، ويُوثق انكشاف التخصيص أو تعذر التعمية كتابة. الإجراء معلّق ولم يُنفذ.",
+        "If the alternative design later adopted is cluster-randomization by facility: a baseline-adjusted model with inference that respects clustering and the actual number of facilities, including when the number of facilities is small. A conventional mixed model is not used alone for a small number of facilities without assessing it. Outcome assessors are blinded to allocation, and allocation unblinding or an inability to blind is documented in writing. The procedure is pending and has not been carried out.",
     )
     add_pair(
         document,
-        "إذا كان التصميم البديل المعتمد لاحقًا مقارنة مضبوطة غير عشوائية: انحدار يضبط القياس القبلي ومربِكات تُسمى مسبقًا. الضبط لا يزيل التحيز غير المقاس.",
-        "If the alternative design later adopted is a quasi-experimental controlled comparison: regression adjusted for baseline and for confounders named in advance. Adjustment does not remove unmeasured bias.",
+        "إذا كان التصميم البديل المعتمد لاحقًا مقارنة شبه تجريبية مضبوطة: انحدار يضبط القياس القبلي ومربِكات تُسمى مسبقًا. الضبط لا يزيل التحيز غير المقاس. مقيمو النتائج يُعمون عن التخصيص، ويُوثق انكشاف التخصيص أو تعذر التعمية كتابة. الإجراء معلّق ولم يُنفذ.",
+        "If the alternative design later adopted is a quasi-experimental controlled comparison: regression adjusted for baseline and for confounders named in advance. Adjustment does not remove unmeasured bias. Outcome assessors are blinded to allocation, and allocation unblinding or an inability to blind is documented in writing. The procedure is pending and has not been carried out.",
     )
     add_h(document, "5. المتغيرات المشتركة / Covariates", 2)
     add_pair(
@@ -591,14 +614,14 @@ def build_sap() -> None:
     add_h(document, "8. الحساسية / Sensitivity", 2)
     add_pair(
         document,
-        "تُفحص البواقي والقيم المؤثرة ومدى SPPB. حساسية مقترحة بعد الإقفال: بنية التجمع، والقياسات المكتملة، وافتراضات الفقد، ومجموعة ضبط بديلة محددة مسبقًا. تحليل الالتزام يضاف فقط بعد تعريف العتبة.",
-        "Inspect residuals, influential values, and the SPPB range. Sensitivity analyses proposed after lock: clustering structure, complete measurements, missingness assumptions, and an alternative prespecified adjustment set. An adherence analysis is added only after the threshold is defined.",
+        "تُفحص البواقي والقيم المؤثرة ومدى SPPB. حساسية مقترحة بعد الإقفال: بنية التجمع، والقياسات المكتملة، وافتراضات الفقد، ومجموعة ضبط بديلة محددة مسبقًا. تحليل per-protocol يضاف فقط بعد اعتماد الجرعة وتعريف العتبة، وهو ليس تحليلًا تأكيديًا.",
+        "Inspect residuals, influential values, and the SPPB range. Sensitivity analyses proposed after lock: clustering structure, complete measurements, missingness assumptions, and an alternative prespecified adjustment set. A per-protocol analysis is added only after the dose is adopted and the threshold is defined, and it is not a confirmatory analysis.",
     )
     add_h(document, "9. الاستطلاع والسلامة / Pilot and safety", 2)
     add_pair(
         document,
-        "الاستطلاع يُلخص وصفيًا بالاستقطاب والاحتفاظ والحضور واكتمال SPPB واكتمال الاستبيانين والالتزام والملاحظات المكتوبة والأحداث. مقام الحضور للبرنامج الكامل هو عدد الملتحقين مضروبًا في 36. مقام استبيانات T1 هو عدد الملتحقين مضروبًا في 2. العتبات الأولية 85% و90% و80% و85% غير معتمدة. لا اختبار تأكيدي للفاعلية. الأحداث تُعرض بالنوع والشدة والعلاقة المحتملة من دون إخفاء حدث خطير.",
-        "The pilot is summarized descriptively: recruitment, retention, attendance, SPPB completion, completion of the two questionnaires, fidelity, written notes, and events. The full-program attendance denominator is the enrolled count multiplied by 36. The T1 questionnaire denominator is the enrolled count multiplied by 2. The provisional thresholds 85, 90, 80, and 85 percent are not adopted. There is no confirmatory efficacy test. Events are shown by type, severity, and possible relation, and a serious event is not hidden.",
+        "الاستطلاع يُلخص وصفيًا بالاستقطاب والاحتفاظ والحضور واكتمال SPPB واكتمال الاستبيانين والتزام المكونات والملاحظات المكتوبة والأحداث. نسبة الحضور = الجلسات المتاحة التي حُضرت ÷ الجلسات المتاحة فعلًا. عند عرض كل الجلسات المخططة يكون المقام = عدد الملتحقين × 36. التزام المكونات = المنفذة ÷ المخططة للجلسة المنفذة. عتبة per-protocol معلّقة وليست تحليلًا تأكيديًا. مقام استبيانات T1 هو عدد الملتحقين مضروبًا في 2. العتبات الأولية 85% و90% و80% و85% غير معتمدة. لا اختبار تأكيدي للفاعلية. الأحداث تُعرض بالنوع والشدة والعلاقة المحتملة من دون إخفاء حدث خطير.",
+        "The pilot is summarized descriptively: recruitment, retention, attendance, SPPB completion, completion of the two questionnaires, component adherence, written notes, and events. Attendance proportion = available sessions attended ÷ sessions actually available. When every planned session is offered, the denominator equals the enrolled count multiplied by 36. Component adherence = delivered ÷ planned for the delivered session. The per-protocol threshold is pending and is not a confirmatory analysis. The T1 questionnaire denominator is the enrolled count multiplied by 2. The provisional thresholds 85, 90, 80, and 85 percent are not adopted. There is no confirmatory efficacy test. Events are shown by type, severity, and possible relation, and a serious event is not hidden.",
     )
     add_h(document, "10. البيانات والبرمجيات / Data and software", 2)
     add_pair(
@@ -613,9 +636,9 @@ def build_sap() -> None:
         ("جدول 2. السريان / Table 2. Flow", ["البند / Flow item", "التدخل / Intervention", "المقارنة / Comparison", "المجموع / Total"], ["فُحصوا", "مؤهلون", "وافقوا", "خُصصوا", "قياس T0", "أكملوا T1", "أكملوا T2 إن نُفذ", "انسحبوا أو فُقدوا"]),
         ("جدول 3. النتيجة الأساسية / Table 3. Primary outcome", ["النتيجة / Outcome", "تدخل T0", "تدخل T1", "مقارنة T0", "مقارنة T1", "الفرق المعدل وفترته", "قيمة الاحتمال"], ["مجموع SPPB"]),
         ("جدول 4. نتائج ثانوية مرشحة / Table 4. Candidate secondary outcomes", ["النتيجة / Outcome", "تدخل T0", "تدخل T1", "مقارنة T0", "مقارنة T1", "الأثر المعدل وفترته"], ["OPQOL-Brief", "LSNS-6 شبكة الأسرة والأصدقاء فقط", "T2 اختياري إن نُفذ"]),
-        ("جدول 5. التنفيذ / Table 5. Delivery", ["المؤشر / Indicator", "التدخل / Intervention", "المقارنة / Comparison", "التعريف / Definition"], ["جلسات معروضة", "نسبة حضور = حضر ÷ (ملتحقون × 36) عند البرنامج الكامل", "متوسط الدقائق", "انحرافات", "أحداث", "أحداث خطيرة"]),
+        ("جدول 5. التنفيذ / Table 5. Delivery", ["المؤشر / Indicator", "التدخل / Intervention", "المقارنة / Comparison", "التعريف / Definition"], ["جلسات مخططة / Planned sessions", "جلسات متاحة فعلًا / Sessions actually available", "نسبة الحضور = الجلسات المتاحة التي حُضرت ÷ الجلسات المتاحة فعلًا. عند عرض كل الجلسات المخططة: المقام = الملتحقون × 36 / Attendance proportion = available sessions attended ÷ sessions actually available. When every planned session is offered: denominator = enrolled count × 36", "التزام المكونات = المنفذة ÷ المخططة للجلسة المنفذة / Component adherence = delivered ÷ planned for the delivered session", "متوسط الدقائق / Mean minutes", "انحرافات / Deviations", "أحداث / Events", "أحداث خطيرة / Serious events"]),
         ("جدول 6. الفقد / Table 6. Missingness", ["المقياس والزمن / Measure and time", "نقص التدخل", "نقص المقارنة", "الأسباب"], ["SPPB T0", "SPPB T1", "تعذر أداء SPPB حسب الدليل", "OPQOL-Brief T1", "LSNS-6 T1", "T2 اختياري"]),
-        ("جدول 7. الحساسية / Table 7. Sensitivity", ["التحليل / Analysis", "الافتراض / Assumption", "الأثر المعدل", "القراءة"], ["النموذج المقفَل لاحقًا", "قياسات مكتملة", "حساسية الفقد", "طريقة تجمع بديلة", "تحليل التزام: غير معرّف حتى تُقفل العتبة"]),
+        ("جدول 7. الحساسية / Table 7. Sensitivity", ["التحليل / Analysis", "الافتراض / Assumption", "الأثر المعدل", "القراءة"], ["النموذج المقفَل لاحقًا", "قياسات مكتملة", "حساسية الفقد", "طريقة تجمع بديلة عند عدد قليل من الدور / Alternative clustering method when the number of facilities is small", "تحليل per-protocol: العتبة معلّقة حتى اعتماد الجرعة وليس تحليلًا تأكيديًا / Per-protocol analysis: threshold pending until the dose is adopted and not a confirmatory analysis"]),
     ]
     for title, headers, labels in shells:
         add_h(document, title, 3)
@@ -630,13 +653,62 @@ def build_sap() -> None:
     document.save(OUT / "GfA_Active_Ageing_SAP_Step24_v2.1.docx")
 
 
+def build_codesign() -> None:
+    document = _doc()
+    banner(document)
+    add_h(document, "بروتوكول مقترح لمرحلة البناء التشاركي السابقة / Proposed protocol for the prior co-design phase", 1)
+    add_pair(
+        document,
+        "هذا بروتوكول مقترح ومستقل عن دليل الجلسات الست والثلاثين. المرحلة لم تبدأ. ليست تدخل الدراسة، ولا مجموعة المقارنة، ولا اختبار فاعلية، ولا تصميمًا منفذًا.",
+        "This is a proposed protocol and it is independent of the 36-session manual. The phase has not started. It is not the study intervention, not the comparison group, not an efficacy test, and not an executed design.",
+    )
+    add_h(document, "1. المشاركون / People who would take part", 2)
+    add_pair(
+        document,
+        "كبار السن المقيمون في دور الرعاية بالقاهرة، والعاملون في تلك الدور. الأسماء والأعداد وعدد اللقاءات معلّقة. لا تُنقل أسماء إلى ملف التحليل.",
+        "Older adults living in the Cairo care homes, and the staff of those homes. Names, counts, and the number of meetings are pending. Names are not copied into the analysis file.",
+    )
+    add_h(document, "2. العمل المكتوب / Written work", 2)
+    add_pair(
+        document,
+        "يناقش الحاضرون كتابة خيارات الحركة والموسيقى والتشكيل وملاحظات السلامة والتقبل. الناتج قائمة مكتوبة من الاقتراحات ورقم إصدار للدليل. الاقتراحات ليست نتائج وليست بيانات مقاييس.",
+        "The people present discuss, in writing, movement options, music, formations, safety comments, and acceptability. The output is a written list of suggestions and a version note for the manual. Suggestions are not results and are not measurement data.",
+    )
+    add_h(document, "3. التوثيق / Documentation", 2)
+    add_pair(
+        document,
+        "التوثيق ملاحظات مكتوبة فقط. لا تصوير، ولا تسجيل صوتي، ولا تسجيل مرئي.",
+        "Documentation is written notes only. There is no photography, no audio recording, and no video recording.",
+    )
+    add_h(document, "4. الموافقة قبل أي لقاء / Consent before any meeting", 2)
+    add_pair(
+        document,
+        "قرار اللجنة والموافقة المكتوبة الفردية مطلوبان قبل أي لقاء. كلاهما غير مسجل في هذه المسودة. هذه الصفحة لا تحمل معرف موافقة.",
+        "A committee decision and individual written consent are required before any meeting. Neither is recorded in this draft. This page carries no approval identifier.",
+    )
+    add_h(document, "5. السلامة / Safety", 2)
+    add_pair(
+        document,
+        "لا تُوصف جرعة تمرين في هذه المرحلة. الجلوس متاح. يُوقف اللقاء عند ألم صدري أو دوار شديد أو ضيق نفس غير معتاد أو اضطراب اتزان مقلق. خطة الطوارئ معلّقة حتى اعتمادها.",
+        "No exercise dose is prescribed in this phase. Seating is available. A meeting stops for chest pain, marked dizziness, unusual breathlessness, or concerning instability. The emergency plan stays pending until it is adopted.",
+    )
+    add_h(document, "6. ما يبقى معلّقًا / What stays pending", 2)
+    add_pair(
+        document,
+        "الدور، ومن يحضر، وعدد اللقاءات، ونص الموافقة، وخطة الطوارئ. لا يُحسم هنا عدد الدور ولا العينة ولا التصميم النهائي للدراسة اللاحقة.",
+        "The facilities, who attends, the number of meetings, the consent text, and the emergency plan stay pending. The facility count, the sample size, and the final design of the later study are not decided here.",
+    )
+    document.save(OUT / "GfA_Active_Ageing_CoDesign_Phase_Protocol_v2.1.docx")
+
+
 def main() -> None:
     OUT.mkdir(parents=True, exist_ok=True)
     build_manual()
     build_pilot()
     build_expert()
     build_sap()
-    print(f"Wrote four V2.1 documents to {OUT}")
+    build_codesign()
+    print(f"Wrote V2.1 documents to {OUT}")
 
 
 if __name__ == "__main__":
