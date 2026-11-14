@@ -6,6 +6,7 @@ import json
 import sys
 import unittest
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / ".agents" / "skills" / "scientific-research" / "scripts"))
@@ -25,6 +26,11 @@ from verify_v2 import (  # noqa: E402
     verify_journal_evidence,
     verify_references,
 )
+
+def setUpModule():
+    patcher = patch("urllib.request.urlopen", side_effect=AssertionError("tests must not open a network connection"))
+    patcher.start()
+
 
 DOI = "10.5555/fixture.v2.match"
 TITLE = "Synthetic movement study for fixture residents"
@@ -76,6 +82,31 @@ class ReferenceVerificationTests(unittest.TestCase):
         self.assertIn("https://doi.org/10.5555/fixture.v2.match", findings[0]["detail_en"])
         self.assertIn("Lovelace, A., & Hopper, G. (2024).", findings[0]["detail_en"])
         self.assertIn("*Journal of Fixture Studies*, 4(2), 10-12.", findings[0]["detail_en"])
+
+    def test_inverted_datacite_names_match_natural_order_and_apa7(self):
+        def lookup(doi: str) -> dict:
+            record = matched_record(doi)
+            record["source"] = "datacite"
+            record["authors"] = ["Lovelace, Ada", "Hopper, Grace"]
+            return record
+
+        finding = verify_references(
+            [
+                {
+                    "title": TITLE,
+                    "year": 2024,
+                    "doi": DOI,
+                    "authors": ["Ada Lovelace", "Grace Hopper"],
+                    "container": CONTAINER,
+                }
+            ],
+            lookup=lookup,
+        )[0]
+        self.assertEqual(finding["severity"], SEVERITY_OK)
+        self.assertIn("Lovelace, A., & Hopper, G. (2024).", finding["detail_en"])
+        self.assertIn(f"https://doi.org/{DOI}", finding["detail_en"])
+        self.assertNotIn("Ada, L.", finding["detail_en"])
+        self.assertIn("*Journal of Fixture Studies*, 4(2), 10-12.", finding["detail_en"])
 
     def test_title_year_author_and_container_mismatches_are_critical(self):
         for reference, evidence in (
@@ -240,6 +271,18 @@ class JournalEvidenceTests(unittest.TestCase):
         finding = verify_journal_evidence(self.evidence(), fetch=self.fetch)[0]
         self.assertEqual(finding["severity"], SEVERITY_OK)
         self.assertIn("not an independent scrape", finding["detail_en"])
+
+        def fetch_q2(url: str) -> dict:
+            if "fees" in url:
+                return {"status": 200, "body": "No mandatory author fee. Optional open access is separate.", "error": None}
+            return {"status": 200, "body": "Indexed as Scopus Q2 2026 Physiotherapy.", "error": None}
+
+        q2 = verify_journal_evidence(
+            self.evidence(quartile="Q2", indexing_excerpt="Scopus Q2 2026 Physiotherapy"),
+            fetch=fetch_q2,
+        )[0]
+        self.assertEqual(q2["severity"], SEVERITY_OK)
+        self.assertIn("Q2", q2["evidence"])
 
     def test_incomplete_unreachable_paid_and_mismatched_evidence_are_not_recommendations(self):
         incomplete = verify_journal_evidence(self.evidence(subject_category="", indexing_excerpt=""), fetch=self.fetch)[0]

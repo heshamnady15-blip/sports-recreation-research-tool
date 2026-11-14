@@ -8,6 +8,7 @@ import tempfile
 import unittest
 import zipfile
 from pathlib import Path
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 SKILL = ROOT / ".agents" / "skills" / "scientific-research"
@@ -15,6 +16,11 @@ sys.path.insert(0, str(SKILL / "scripts"))
 
 import policy  # noqa: E402
 from package_skill import build_zip  # noqa: E402
+
+
+def setUpModule():
+    patcher = patch("urllib.request.urlopen", side_effect=AssertionError("tests must not open a network connection"))
+    patcher.start()
 
 
 class JournalTests(unittest.TestCase):

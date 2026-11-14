@@ -80,13 +80,28 @@ def _similar(left: str, right: str) -> float:
     return SequenceMatcher(None, a, b).ratio()
 
 
+def _split_author(author: str) -> tuple[str, list[str]]:
+    """Return family name and given-name parts. A comma marks Family, Given order."""
+    raw = " ".join(author.replace("،", ",").split())
+    if "," in raw:
+        family, given = raw.split(",", 1)
+        return family.strip(), [part for part in given.split() if part]
+    parts = [part for part in raw.split() if part]
+    if not parts:
+        return "", []
+    if len(parts) == 1:
+        return parts[0], []
+    return parts[-1], parts[:-1]
+
+
 def _family_names(authors: list[str]) -> set[str]:
     names: set[str] = set()
     for author in authors:
-        parts = re.findall(r"[A-Za-z\u0600-\u06FF][\w\u0600-\u06FF'’-]*", author)
-        if parts:
-            names.add(_normalize(parts[-1]))
-    return {name for name in names if name}
+        family, _given = _split_author(str(author))
+        normalized = _normalize(family)
+        if normalized:
+            names.add(normalized)
+    return names
 
 
 def _doi_key(value: str) -> str:
@@ -261,11 +276,10 @@ def _apa_authors(authors: list[str]) -> str:
 
 
 def _apa_person(author: str) -> str:
-    parts = author.replace(",", " ").split()
-    if len(parts) == 1:
-        return parts[0]
-    family = parts[-1]
-    initials = " ".join(f"{part[0].upper()}." for part in parts[:-1] if part)
+    family, given_parts = _split_author(author)
+    if not family:
+        return ""
+    initials = " ".join(f"{part[0].upper()}." for part in given_parts if part)
     return f"{family}, {initials}" if initials else family
 
 
