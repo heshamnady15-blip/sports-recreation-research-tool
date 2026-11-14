@@ -18,4 +18,4 @@ jobs:
           python-version: "3.12"
 
       - name: Run scientific-research skill tests offline
-        run: python3 -m unittest tests.test_scientific_research tests.test_scientific_research_v2
+        run: python3 -m unittest tests.test_scientific_research tests.test_scientific_research_v2 tests.test_gfa_active_ageing_v21
