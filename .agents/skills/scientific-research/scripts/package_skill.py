@@ -8,18 +8,27 @@ import zipfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-EXCLUDED = {"__pycache__", "researcher-profile.json"}
+EXCLUDED_PARTS = {"__pycache__", "researcher-profile.json", "studies"}
+
+
+def included(path: Path, root: Path) -> bool:
+    """Keep skill files. Drop caches, a filled researcher profile, and study files."""
+    if not path.is_file():
+        return False
+    relative = path.relative_to(root)
+    if path.suffix == ".pyc":
+        return False
+    if any(part in EXCLUDED_PARTS for part in relative.parts):
+        return False
+    if "gfa-active-ageing" in relative.as_posix().lower():
+        return False
+    return True
 
 
 def iter_files(root: Path):
     for path in root.rglob("*"):
-        if not path.is_file():
-            continue
-        if any(part in EXCLUDED for part in path.parts):
-            continue
-        if path.suffix == ".pyc":
-            continue
-        yield path
+        if included(path, root):
+            yield path
 
 
 def build_zip(destination: Path) -> Path:

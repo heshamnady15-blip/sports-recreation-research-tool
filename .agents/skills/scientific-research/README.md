@@ -2,7 +2,7 @@
 
 **المؤلف / Author:** Dr. Hesham El-Nady  
 **الاسم التقني / Technical name:** `scientific-research`  
-**الإصدار المرشح / Release candidate:** `2.0.0-rc.1`  
+**الإصدار / Version:** `2.0.0`  
 **المستودع / Repository:** [heshamnady15-blip/sports-recreation-research-tool](https://github.com/heshamnady15-blip/sports-recreation-research-tool)
 
 هذا ملف المهارة نفسها. أمر Cursor يبقى `/scientific-research` لأن مواصفة Agent Skills تلزم حقل `name` بأن يطابق اسم المجلد. الاسم الظاهر في الوصف وبيانات المهارة هو El-Nady Scientific Research Assistant.
@@ -43,7 +43,7 @@ From the repository root, the same command copies only this skill to `~/.cursor/
 
 ## الاستخدام / Use
 
-1. انسخ `assets/researcher-profile.template.json` إلى `assets/researcher-profile.json` واملأ اسمك وجامعتك وقسمك وبريدك المؤسسي وORCID. القالب فارغ عمدًا. اسم مؤلف المهارة لا يملأ هذا الملف.
+1. انسخ `assets/researcher-profile.template.json` إلى `assets/researcher-profile.json` واملأ اسمك وجامعتك وقسمك وبريدك المؤسسي وORCID. القالب فارغ عمدًا. اسم مؤلف المهارة لا يملأ هذا الملف. الأمر `python3 scripts/policy.py profile` يقرأ هذا الملف تلقائيًا. مرّر `--path` إذا كان الملف في مكان آخر. إذا لم يوجد الملف تبقى النتيجة غير مكتملة.
 2. في Cursor اكتب `/scientific-research` ثم الطلب، أو اطلب بحثًا في الترويح أو الجمباز للجميع أو الترقية.
 3. نفّذ الأوامر من مجلد المهارة. أمثلة بلا شبكة:
 
@@ -68,7 +68,7 @@ python3 scripts/capability_probe.py --live-doi 10.1038/171737a0
 
 `--live-doi` يطبع السجل الذي تعيده Crossref أو DataCite. لا تستخدم مخرجاته إلا إذا طابق العنوان والمؤلفين والسنة والمجلة. انقطاع الاتصال ليس تطابقًا.
 
-Copy the empty researcher template and fill your own identity. The skill author's name does not fill that file. The `journal` command without an indexing source and a fee source returns `unverified` and recommends nothing. `--live-doi` prints the record returned by Crossref or DataCite.
+Copy the empty researcher template and fill your own identity. The skill author's name does not fill that file. `python3 scripts/policy.py profile` reads `assets/researcher-profile.json` when `--path` is omitted, and reads the file you pass when `--path` is present. A missing file stays incomplete. The `journal` command without an indexing source and a fee source returns `unverified` and recommends nothing. `--live-doi` prints the record returned by Crossref or DataCite.
 
 ## التحديث / Update
 
@@ -96,4 +96,4 @@ Fetch the repository, install the skill folder again, and run the three skill te
 
 ## الترخيص / License
 
-مستودع المصدر يحمل اليوم ملف `LICENSE` برخصة MIT وحقوق النسخ باسم الحساب `heshamnady15-blip`. اقتراح ترخيص المهارة للمشاركة مع نسب التأليف مكتوب في [docs/license-proposal.md](docs/license-proposal.md) ولم يُعتمد بعد، ولم يُستبدل ملف `LICENSE`.
+مستودع المصدر يحمل ملف `LICENSE` برخصة MIT. سطر حقوق النسخ هو `Copyright (c) 2026 Dr. Hesham El-Nady (github.com/heshamnady15-blip)`. نص الإذن لم يتغير. سجل القرار في [docs/license-proposal.md](docs/license-proposal.md). الاستشهاد في `CITATION.cff` داخل المهارة وفي جذر المستودع، والنسختان متطابقتان.

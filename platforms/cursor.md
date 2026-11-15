@@ -20,6 +20,22 @@
 
 ## الاستخدام
 
-ابدأ بملء نسخة من `assets/researcher-profile.template.json` في `assets/researcher-profile.json`، ثم اطلب المنتج واللغة والتصميم. مثال: «جهّز خطة مراجعة منهجية عن الجمباز للجميع لكبار السن في الأندية، بنسختين عربية وإنجليزية، واقترح مجلة Scopus بلا رسوم نشر إلزامية بعد التحقق». المهارة تتوقف إذا نقصت بيانات الباحث، ولا تكتب مرجعًا بلا مصدر، وتراجع كل قسم على حدة.
+ابدأ بملء نسخة من `assets/researcher-profile.template.json` في `assets/researcher-profile.json`، ثم اطلب المنتج واللغة والتصميم. الأمر `python3 scripts/policy.py profile` يقرأ هذا الملف عند غياب `--path`، والخيار `--path` يحدد ملفًا آخر. مثال: «جهّز خطة مراجعة منهجية عن الجمباز للجميع لكبار السن في الأندية، بنسختين عربية وإنجليزية، واقترح مجلة Scopus بلا رسوم نشر إلزامية بعد التحقق». المهارة تتوقف إذا نقصت بيانات الباحث، ولا تكتب مرجعًا بلا مصدر، وتراجع كل قسم على حدة.
 
-الإصدار الثاني من المهارة نفسها يضيف `verify-references` و`verify-journal` و`audit-methods` و`audit` داخل `scripts/policy.py`. أمر `journal` القديم يبقى قرارًا أوليًا، والتوصية بمجلة أو بمرجع تمر من أوامر الإصدار الثاني. التقرير آلي وبالعربية والإنجليزية، ولا يُقرأ على أنه إثبات لصحة البحث كاملة.
+الإصدار 2.0.0 من المهارة نفسها يضيف `verify-references` و`verify-journal` و`audit-methods` و`audit` داخل `scripts/policy.py`. أمر `journal` يبقى قرارًا أوليًا، والتوصية بمجلة أو بمرجع تمر من أوامر التحقق. التقرير آلي وبالعربية والإنجليزية، ولا يُقرأ على أنه إثبات لصحة البحث كاملة.
+
+## Install and use in Cursor
+
+The public name is El-Nady Scientific Research Assistant, by Dr. Hesham El-Nady. The slash command stays `/scientific-research` because Cursor shows the folder name. The bilingual new-user guide is `.agents/skills/scientific-research/docs/cursor-install.md`.
+
+In this repository, `.cursor/skills/scientific-research` is a link to `.agents/skills/scientific-research`.
+
+For every project on this machine:
+
+```bash
+.agents/skills/scientific-research/scripts/install-skill.sh cursor-user
+```
+
+The script copies the skill to `~/.cursor/skills/scientific-research/`. Copy `assets/researcher-profile.template.json` to `assets/researcher-profile.json` and fill your own five fields. `python3 scripts/policy.py profile` reads that file when `--path` is omitted. `--path` selects another file. A missing file stays incomplete. The skill does not invent a researcher, a reference, or a journal.
+
+Version 2.0.0 keeps `verify-references`, `verify-journal`, `audit-methods`, and `audit` in `scripts/policy.py`. The `journal` command is a preliminary decision. An automated report is not proof that the study is valid. The `v2.0.0` tag and the GitHub Release are not published from this branch.

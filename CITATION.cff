@@ -1,0 +1,14 @@
+cff-version: 1.2.0
+title: El-Nady Scientific Research Assistant
+message: If you use this skill, cite it using these metadata. The technical skill name remains scientific-research.
+type: software
+authors:
+  - given-names: Hesham
+    family-names: El-Nady
+    alias: heshamnady15-blip
+repository-code: https://github.com/heshamnady15-blip/sports-recreation-research-tool
+version: 2.0.0
+abstract: >-
+  A bilingual scientific-research skill for sport recreation, Gymnastics for
+  All, sport science, and Egyptian academic promotion checks. DOI and journal
+  verification require the external source named in each record.

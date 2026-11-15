@@ -15,10 +15,10 @@
 
 ```bash
 python3 .agents/skills/scientific-research/scripts/package_skill.py \
-  --output dist/scientific-research-2.0.0-rc.1.zip
+  --output dist/scientific-research-2.0.0.zip
 ```
 
-الأرشيف جذره `SKILL.md`. لا يحتوي مجلد `studies/` ولا ملفات GfA Active Ageing.
+الأرشيف جذره `SKILL.md`. البناء يستبعد `researcher-profile.json` وأي مسار يحوي `studies` أو `gfa-active-ageing`. مجلد `dist/` خارج Git، لذلك يُرفق الأرشيف عند إنشاء GitHub Release ولا يُحفظ في التاريخ.
 
 ## ما يُرسل للباحث / What a researcher receives
 
@@ -28,14 +28,15 @@ python3 .agents/skills/scientific-research/scripts/package_skill.py \
 
 لا تُرسل مع المهارة مسودات الدراسة، ولا نتائج، ولا موافقات، ولا ملف باحث معبّأ.
 
-## خطوات بعد الموافقة / Steps after approval
+## خطوات بعد الموافقة النهائية / Steps after final approval
 
-1. اعتماد الترخيص المقترح أو الإبقاء على MIT.
-2. دمج طلب السحب.
-3. إنشاء GitHub Release من الوسم الذي يُطلب صراحة، مع هذه الملاحظات.
-4. إرسال رابط المستودع ودليل `docs/cursor-install.md`.
-5. إذا طُلب الظهور في سوق Cursor: إرسال المستودع من صفحة النشر بعد المراجعة اليدوية للسوق. هذه الخطوة ليست جزءًا من هذا المرشح.
-6. لظهور زر Cite في GitHub باسم المؤلف، يمكن لاحقًا وضع `CITATION.cff` في جذر المستودع. النسخة الحالية داخل مجلد المهارة حتى لا تُنسب كل محتويات المستودع قبل الموافقة.
+سطر حقوق MIT ورقم `2.0.0` و`CITATION.cff` في الجذر نُفذت في فرع المراجعة. الوسم والنشر ما زالا ينتظران موافقة نهائية.
+
+1. دمج طلب السحب بعد الموافقة النهائية.
+2. إنشاء الوسم `v2.0.0` فقط بعد طلب صريح، ثم GitHub Release من ذلك الوسم مع `docs/RELEASE-NOTES.md` وأرشيف `dist/scientific-research-2.0.0.zip`.
+3. إرسال رابط المستودع ودليل `docs/cursor-install.md`.
+4. إذا طُلب الظهور في سوق Cursor: إرسال المستودع من صفحة النشر بعد المراجعة اليدوية للسوق. هذه الخطوة ليست جزءًا من هذه النسخة.
+5. زر Cite في GitHub يقرأ `CITATION.cff` من جذر المستودع. النسخة داخل مجلد المهارة مطابقة له.
 
 ## ما يبقى على الباحث المستلم / What the receiving researcher still does
 

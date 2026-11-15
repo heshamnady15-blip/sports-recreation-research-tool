@@ -76,9 +76,18 @@ python3 scripts/policy.py verify-references --path references.json --offline
 
 ```bash
 cp assets/researcher-profile.template.json assets/researcher-profile.json
+python3 scripts/policy.py profile
 ```
 
-املأ الحقول الخمسة ببياناتك. لا تضع اسم مؤلف المهارة مكان اسمك. الملف الناتج يبقى خارج Git عند التثبيت من المستودع، وسكربت التثبيت يحذفه من النسخة المنسوخة إن وُجد.
+املأ الحقول الخمسة ببياناتك. لا تضع اسم مؤلف المهارة مكان اسمك. الأمر بلا `--path` يقرأ `assets/researcher-profile.json`. إذا لم يوجد الملف تبقى النتيجة غير مكتملة وتُطلب الحقول. لتحديد ملف آخر:
+
+```bash
+python3 scripts/policy.py profile --path /path/to/researcher-profile.json
+```
+
+الملف الناتج يبقى خارج Git عند التثبيت من المستودع، وسكربت التثبيت يحذفه من النسخة المنسوخة إن وُجد.
+
+Fill the five fields with your own data. Do not enter the skill author's name in place of yours. Without `--path`, the command reads `assets/researcher-profile.json`. A missing file stays incomplete. `--path` selects a different file. The install script removes a filled profile from the copied skill, and Git ignores that file in this repository.
 
 ## التحديث / Update
 

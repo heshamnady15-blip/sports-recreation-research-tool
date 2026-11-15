@@ -60,12 +60,24 @@ class CleanProjectTests(unittest.TestCase):
         self.assertEqual(identity["technical_name"], "scientific-research")
         self.assertEqual(identity["display_name"], "El-Nady Scientific Research Assistant")
         self.assertEqual(identity["author"], "Dr. Hesham El-Nady")
+        self.assertEqual(identity["version"], "2.0.0")
         self.assertEqual(identity["orcid"], "")
+        citation = (self.skill / "CITATION.cff").read_text(encoding="utf-8")
+        self.assertEqual((ROOT / "CITATION.cff").read_text(encoding="utf-8"), citation)
+        self.assertIn("version: 2.0.0\n", citation)
+        self.assertIn("family-names: El-Nady", citation)
+        license_text = (ROOT / "LICENSE").read_text(encoding="utf-8")
+        self.assertIn(
+            "Copyright (c) 2026 Dr. Hesham El-Nady (github.com/heshamnady15-blip)",
+            license_text,
+        )
+        self.assertIn("Permission is hereby granted, free of charge", license_text)
         template = json.loads((self.skill / "assets" / "researcher-profile.template.json").read_text(encoding="utf-8"))
         self.assertEqual(template["name"], "")
         plugin = json.loads((ROOT / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8"))
         self.assertEqual(plugin["skills"], ".agents/skills/scientific-research")
         self.assertEqual(plugin["author"]["name"], "Dr. Hesham El-Nady")
+        self.assertEqual(plugin["version"], "2.0.0")
         self.assertNotIn("license", plugin)
 
     def test_offline_commands_do_not_recommend_an_unverified_journal_or_doi(self):

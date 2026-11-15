@@ -18,7 +18,7 @@ metadata:
   display_name: El-Nady Scientific Research Assistant
   author: Dr. Hesham El-Nady
   technical_name: scientific-research
-  version: "2.0.0-rc.1"
+  version: "2.0.0"
   github: heshamnady15-blip
 ---
 
@@ -30,7 +30,7 @@ metadata:
 
 ## قبل الكتابة
 
-1. اقرأ ملف الباحث إن وُجد بجانب القالب `assets/researcher-profile.template.json`. الحقول هي الاسم والجامعة والقسم والبريد المؤسسي وORCID. إذا نقص حقل، توقف واطلبه. لا تخترع باحثًا.
+1. اقرأ ملف الباحث إن وُجد بجانب القالب `assets/researcher-profile.template.json`. الحقول هي الاسم والجامعة والقسم والبريد المؤسسي وORCID. إذا نقص حقل، توقف واطلبه. لا تخترع باحثًا. الأمر `python3 scripts/policy.py profile` يقرأ `assets/researcher-profile.json` عند غياب `--path`، ويقرأ الملف الممرَّر عند وجود `--path`. غياب الملف يبقي الملف غير مكتمل.
 2. حدّد منتجًا واحدًا: `original` أو `promotion` أو `thesis` أو `systematic_review` أو `meta_analysis` أو `thesis_to_article`.
 3. حدّد التصميم من السؤال: كمي، نوعي، مختلط، تجريبي، وصفي، ارتباطي، مراجعة منهجية، أو تحليل بعدي.
 4. حدّد الفئة من الموضوع. لا تفترض عمرًا أو مجتمعًا رياضيًا بعينه.

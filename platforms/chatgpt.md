@@ -7,7 +7,7 @@
 ## تجهيز الملف
 
 ```bash
-python3 .agents/skills/scientific-research/scripts/package_skill.py --output dist/scientific-research.zip
+python3 .agents/skills/scientific-research/scripts/package_skill.py --output dist/scientific-research-2.0.0.zip
 ```
 
 الأرشيف يضع `SKILL.md` في جذره. راجع المحتوى قبل الرفع. ChatGPT يفحص المهارة المرفوعة، وقد تظهر Needs Review أو Blocked.
@@ -18,4 +18,18 @@ python3 .agents/skills/scientific-research/scripts/package_skill.py --output dis
 
 للاستعمال الشخصي خارج مساحة العمل، يمكن لصق تعليمات `SKILL.md` في محادثة، لكن الرفع هو مسار ChatGPT الموثق للمهارة القابلة لإعادة الاستخدام.
 
-ارفع الأرشيف بعد بناء الإصدار الثاني. قسم الإصدار الثاني في `SKILL.md` هو الذي يفرض فحص DOI وصفحات المجلات وتدقيق المنهج.
+ارفع أرشيف الإصدار 2.0.0. قسم التحقق في `SKILL.md` هو الذي يفرض فحص DOI وصفحات المجلات وتدقيق المنهج. الأرشيف لا يحوي ملف باحث معبّأ ولا ملفات دراسة GfA Active Ageing.
+
+## Install and use in ChatGPT
+
+ChatGPT skills are available on Business, Enterprise, Healthcare, and Edu plans, according to the workspace settings. The help path is the sidebar, Plugins, the Skills tab, then Create, then Upload from your computer.
+
+Build the archive from the repository root:
+
+```bash
+python3 .agents/skills/scientific-research/scripts/package_skill.py --output dist/scientific-research-2.0.0.zip
+```
+
+`SKILL.md` is at the archive root. Review the archive before upload. ChatGPT may mark an upload Needs Review or Blocked. The archive does not contain a filled researcher profile or the GfA Active Ageing study files.
+
+After upload, select the skill or ask for a task inside its description. `python3 scripts/policy.py profile` reads `assets/researcher-profile.json` when `--path` is omitted. Version 2.0.0 is prepared for review and has not been tagged.
