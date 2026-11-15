@@ -1,6 +1,6 @@
 # خطة التوزيع للباحثين / Distribution plan for researchers
 
-هذه خطة. التنفيذ العلني ينتظر الموافقة. لا يوجد Release منشور.
+إصدار GitHub `v2.0.0` منشور. إدراج Cursor Marketplace لم يُرسل ولم يُقبل.
 
 ## من يستطيع التثبيت اليوم / Who can install it today
 
@@ -9,7 +9,7 @@
 | نسخ المجلد أو `install-skill.sh cursor-user` | نعم، بعد سحب المستودع العام | الأمر `/scientific-research`، والوصف يبدأ بـ El-Nady Scientific Research Assistant, by Dr. Hesham El-Nady |
 | فتح المستودع في Cursor | نعم | المسار نفسه |
 | رفع الأرشيف إلى Claude أو ChatGPT أو Gemini | نعم، بعد بناء الأرشيف محليًا | اسم المهارة داخل الأرشيف `scientific-research` |
-| Cursor Marketplace أو فريق Teams | لا، لم يُرسل | ملف `.cursor-plugin/plugin.json` جاهز كمرشح فقط |
+| Cursor Marketplace | لا، لم يُرسل ولم يُقبل | الإضافة تكتشف `skills/scientific-research` فقط |
 
 بناء الأرشيف من جذر المستودع:
 
@@ -30,13 +30,12 @@ python3 .agents/skills/scientific-research/scripts/package_skill.py \
 
 ## خطوات بعد الموافقة النهائية / Steps after final approval
 
-سطر حقوق MIT ورقم `2.0.0` و`CITATION.cff` في الجذر نُفذت في فرع المراجعة. الوسم والنشر ما زالا ينتظران موافقة نهائية.
+الوسم `v2.0.0` وأرشيف GitHub Release منشوران. هذا التعديل لا يعيد إنشاء الوسم ولا يستبدل الأرشيف المنشور.
 
-1. دمج طلب السحب بعد الموافقة النهائية.
-2. إنشاء الوسم `v2.0.0` فقط بعد طلب صريح، ثم GitHub Release من ذلك الوسم مع `docs/RELEASE-NOTES.md` وأرشيف `dist/scientific-research-2.0.0.zip`.
-3. إرسال رابط المستودع ودليل `docs/cursor-install.md`.
-4. إذا طُلب الظهور في سوق Cursor: إرسال المستودع من صفحة النشر بعد المراجعة اليدوية للسوق. هذه الخطوة ليست جزءًا من هذه النسخة.
-5. زر Cite في GitHub يقرأ `CITATION.cff` من جذر المستودع. النسخة داخل مجلد المهارة مطابقة له.
+1. بيان الإضافة يشير إلى المجلد الأب `skills/`، وفيه مهارة `scientific-research` فقط.
+2. اختبار التثبيت المحلي: `scripts/install-skill.sh cursor-plugin-local` ثم Reload Window في Cursor.
+3. إرسال رابط المستودع العام من https://cursor.com/marketplace/publish يتم يدويًا بحساب صاحب المستودع. القبول يظهر لاحقًا في https://cursor.com/marketplace.
+4. زر Cite في GitHub يقرأ `CITATION.cff` من جذر المستودع. النسخة داخل مجلد المهارة مطابقة له.
 
 ## ما يبقى على الباحث المستلم / What the receiving researcher still does
 

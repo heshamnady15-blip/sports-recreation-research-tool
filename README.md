@@ -4,9 +4,9 @@
 
 ## scientific-research
 
-الاسم الرسمي: **El-Nady Scientific Research Assistant**. المؤلف: **Dr. Hesham El-Nady**. الاسم التقني وأمر Cursor: `scientific-research`. الإصدار المعد للمراجعة: **2.0.0**. لم يُنشأ الوسم `v2.0.0` ولم يُنشر GitHub Release. الاستشهاد في `CITATION.cff` بجذر المستودع وداخل مجلد المهارة.
+الاسم الرسمي: **El-Nady Scientific Research Assistant**. المؤلف: **Dr. Hesham El-Nady**. الاسم التقني وأمر Cursor: `scientific-research`. الإصدار: **2.0.0**. الوسم `v2.0.0` وGitHub Release منشوران. إدراج Cursor Marketplace لم يُرسل ولم يُقبل. الاستشهاد في `CITATION.cff` بجذر المستودع وداخل مجلد المهارة.
 
-Prepared version: **2.0.0**. The `v2.0.0` tag and the GitHub Release are not published. Citation metadata is in the root `CITATION.cff` and in the skill folder, and the two files match.
+Version **2.0.0** is the published GitHub Release. The Cursor Marketplace listing has not been submitted or accepted. Citation metadata is in the root `CITATION.cff` and in the skill folder, and the two files match.
 
 مهارة بحث علمي للترويح الرياضي، والجمباز للجميع، وعلوم الرياضة، والتربية البدنية. تعمل في Cursor وClaude وChatGPT وGemini من مجلد واحد. دليل المهارة بالعربية والإنجليزية: `.agents/skills/scientific-research/README.md`. التثبيت لمستخدم جديد: `.agents/skills/scientific-research/docs/cursor-install.md`.
 
@@ -21,7 +21,7 @@ Prepared version: **2.0.0**. The `v2.0.0` tag and the GitHub Release are not pub
 - [ChatGPT](platforms/chatgpt.md)
 - [Gemini](platforms/gemini.md)
 
-المصدر الذي تعدّله هو `.agents/skills/scientific-research/`. مجلدا `.cursor/skills/scientific-research` و`.claude/skills/scientific-research` يشيران إليه.
+المصدر الذي تعدّله هو `.agents/skills/scientific-research/`. مجلدا `.cursor/skills/scientific-research` و`.claude/skills/scientific-research` يشيران إليه. إضافة Cursor تقرأ حقل `skills` كالمجلد الأب `skills/`، وهذا المجلد يحتوي `scientific-research` فقط. مهارة `sport-recreation-gymnastics-research` تبقى خارج هذه الإضافة.
 
 ### الاختبار
 

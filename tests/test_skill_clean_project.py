@@ -6,6 +6,7 @@ These checks do not open the network and do not read studies/gfa-active-ageing.
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -75,10 +76,14 @@ class CleanProjectTests(unittest.TestCase):
         template = json.loads((self.skill / "assets" / "researcher-profile.template.json").read_text(encoding="utf-8"))
         self.assertEqual(template["name"], "")
         plugin = json.loads((ROOT / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8"))
-        self.assertEqual(plugin["skills"], ".agents/skills/scientific-research")
+        self.assertEqual(plugin["skills"], "skills")
         self.assertEqual(plugin["author"]["name"], "Dr. Hesham El-Nady")
         self.assertEqual(plugin["version"], "2.0.0")
         self.assertNotIn("license", plugin)
+        self.assertNotIn("has not been tagged", plugin["description"])
+        self.assertNotIn("has not been submitted", plugin["description"])
+        self.assertIn("El-Nady Scientific Research Assistant", plugin["description"])
+        self.assertIn("DOI", plugin["description"])
 
     def test_offline_commands_do_not_recommend_an_unverified_journal_or_doi(self):
         policy = self.skill / "scripts" / "policy.py"
@@ -155,6 +160,68 @@ class CleanProjectTests(unittest.TestCase):
         self.assertTrue(by_command["verify-references"]["network"])
         self.assertIn("api.crossref.org", by_command["verify-references"]["external_source"])
         self.assertTrue(by_command["verify-journal"]["network"])
+
+    def test_plugin_discovers_only_scientific_research(self):
+        found = _discovered_skills(ROOT)
+        self.assertEqual([path.name for path in found], ["scientific-research"])
+        skill_md = (found[0] / "SKILL.md").read_text(encoding="utf-8")
+        self.assertTrue(skill_md.startswith("---\nname: scientific-research\n"))
+        names = [path.relative_to(found[0]).as_posix() for path in found[0].rglob("*") if path.is_file()]
+        self.assertIn("SKILL.md", names)
+        self.assertNotIn("assets/researcher-profile.json", names)
+        self.assertFalse(any("gfa-active-ageing" in name.lower() for name in names))
+        self.assertFalse(any(name.startswith("studies/") or "/studies/" in name for name in names))
+        self.assertFalse((ROOT / "skills" / "sport-recreation-gymnastics-research").exists())
+        identity = json.loads((found[0] / "assets" / "skill-identity.json").read_text(encoding="utf-8"))
+        self.assertEqual(identity["institutional_email"], "")
+        self.assertEqual(identity["orcid"], "")
+
+    def test_local_plugin_install_keeps_studies_and_profile_out(self):
+        with tempfile.TemporaryDirectory() as directory:
+            env = dict(**os.environ)
+            env["HOME"] = directory
+            script = SKILL / "scripts" / "install-skill.sh"
+            installed = subprocess.run(
+                ["bash", str(script), "cursor-plugin-local"],
+                cwd=ROOT,
+                env=env,
+                check=False,
+                capture_output=True,
+                text=True,
+            )
+            self.assertEqual(installed.returncode, 0, installed.stderr)
+            plugin_root = Path(directory) / ".cursor" / "plugins" / "local" / "el-nady-scientific-research"
+            found = _discovered_skills(plugin_root)
+            self.assertEqual([path.name for path in found], ["scientific-research"])
+            self.assertFalse((plugin_root / "skills" / "scientific-research").is_symlink())
+            names = [path.relative_to(plugin_root).as_posix() for path in plugin_root.rglob("*") if path.is_file()]
+            self.assertTrue(any(name.endswith("skills/scientific-research/SKILL.md") for name in names))
+            self.assertFalse(any(name.endswith("researcher-profile.json") for name in names))
+            self.assertFalse(any("gfa-active-ageing" in name.lower() or name.startswith("studies/") for name in names))
+            self.assertFalse(any("sport-recreation-gymnastics-research" in name for name in names))
+            manifest = json.loads((plugin_root / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8"))
+            self.assertEqual(manifest["skills"], "skills")
+            self.assertNotIn("..", Path(manifest["skills"]).parts)
+
+
+def _discovered_skills(plugin_root: Path) -> list[Path]:
+    """Match Cursor plugin discovery: subdirectories of the skills parent that contain SKILL.md."""
+    manifest_path = plugin_root / ".cursor-plugin" / "plugin.json"
+    manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+    skills_field = manifest["skills"]
+    relative = Path(skills_field)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise AssertionError(skills_field)
+    parent = plugin_root / relative
+    if not parent.is_dir():
+        raise AssertionError(f"{parent} is not a skill parent")
+    found = []
+    for child in sorted(parent.iterdir(), key=lambda path: path.name):
+        if child.name.startswith("."):
+            continue
+        if (child / "SKILL.md").is_file():
+            found.append(child)
+    return found
 
 
 if __name__ == "__main__":

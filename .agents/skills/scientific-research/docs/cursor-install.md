@@ -101,4 +101,12 @@ git pull
 
 ## ما لا يكفي للتثبيت من واجهة Cursor وحدها / What the Cursor screen does not do yet
 
-Cursor لا يستورد مهارة من رابط GitHub مباشرة. الاستيراد للآخرين يتم بنسخ المجلد، أو بتثبيت إضافة بعد اعتمادها في سوق Cursor. ملف `.cursor-plugin/plugin.json` في المستودع مرشح توزيع ولم يُرسل إلى السوق.
+Cursor لا يستورد مهارة من رابط GitHub مباشرة. الاستيراد للآخرين يتم بنسخ المجلد، أو بتثبيت إضافة بعد اعتمادها في سوق Cursor. ملف `.cursor-plugin/plugin.json` يقرأ حقل `skills` كمجلد أب هو `skills/`، وهذا المجلد يحتوي `scientific-research` فقط. مهارة `sport-recreation-gymnastics-research` وملفات `studies/` ليست ضمن مكوّن الإضافة. الإرسال اليدوي من https://cursor.com/marketplace/publish لم يُنفَّذ، والمهارة غير مقبولة في السوق.
+
+لاختبار شكل الإضافة على هذا الجهاز من نسخة المستودع:
+
+```bash
+.agents/skills/scientific-research/scripts/install-skill.sh cursor-plugin-local
+```
+
+ينسخ البيان ومجلد `skills/scientific-research` إلى `~/.cursor/plugins/local/el-nady-scientific-research/`. النسخة ملفات حقيقية بلا رابط رمزي، وبلا `researcher-profile.json` وبلا ملفات دراسة. بعد ذلك أعد تحميل نافذة Cursor وافتح Customize. هذه الخطوة لا ترسل الإضافة إلى السوق.

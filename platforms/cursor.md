@@ -24,6 +24,14 @@
 
 الإصدار 2.0.0 من المهارة نفسها يضيف `verify-references` و`verify-journal` و`audit-methods` و`audit` داخل `scripts/policy.py`. أمر `journal` يبقى قرارًا أوليًا، والتوصية بمجلة أو بمرجع تمر من أوامر التحقق. التقرير آلي وبالعربية والإنجليزية، ولا يُقرأ على أنه إثبات لصحة البحث كاملة.
 
+## اختبار إضافة Cursor محليًا
+
+```bash
+.agents/skills/scientific-research/scripts/install-skill.sh cursor-plugin-local
+```
+
+يُنشئ `~/.cursor/plugins/local/el-nady-scientific-research/` من `.cursor-plugin/plugin.json` ومجلد `skills/scientific-research` فقط. أعد تحميل النافذة ثم افتح Customize. هذا التثبيت لا يرسل الإضافة إلى Cursor Marketplace.
+
 ## Install and use in Cursor
 
 The public name is El-Nady Scientific Research Assistant, by Dr. Hesham El-Nady. The slash command stays `/scientific-research` because Cursor shows the folder name. The bilingual new-user guide is `.agents/skills/scientific-research/docs/cursor-install.md`.
