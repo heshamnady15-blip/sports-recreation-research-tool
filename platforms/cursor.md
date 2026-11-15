@@ -1,5 +1,7 @@
 # التثبيت والاستخدام في Cursor
 
+الاسم الرسمي: El-Nady Scientific Research Assistant. المؤلف: Dr. Hesham El-Nady. الأمر في المحادثة يبقى `/scientific-research` لأن Cursor يعرض اسم المجلد، ووصف المهارة يبدأ بالاسم الرسمي واسم المؤلف. دليل المستخدم الجديد داخل المهارة: `.agents/skills/scientific-research/docs/cursor-install.md`.
+
 المهارة مثبتة داخل هذا المستودع في `.cursor/skills/scientific-research/`، وهو رابط إلى المجلد المصدر `.agents/skills/scientific-research/`. دليل Cursor: https://cursor.com/docs/skills
 
 ## داخل هذا المستودع
