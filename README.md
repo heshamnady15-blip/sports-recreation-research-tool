@@ -21,7 +21,7 @@ Version **2.0.0** is the published GitHub Release. The Cursor Marketplace listin
 - [ChatGPT](platforms/chatgpt.md)
 - [Gemini](platforms/gemini.md)
 
-المصدر الذي تعدّله هو `.agents/skills/scientific-research/`. مجلدا `.cursor/skills/scientific-research` و`.claude/skills/scientific-research` يشيران إليه. إضافة Cursor تقرأ حقل `skills` كالمجلد الأب `skills/`، وهذا المجلد يحتوي `scientific-research` فقط. مهارة `sport-recreation-gymnastics-research` تبقى خارج هذه الإضافة.
+المصدر الذي تعدّله هو `.agents/skills/scientific-research/`. مجلدا `.cursor/skills/scientific-research` و`.claude/skills/scientific-research` يشيران إليه. إضافة Cursor تقرأ المجلد الأب `skills/`، وفيه نسخة ملفات مستقلة من `scientific-research` فقط، وليست رابطًا إلى الأصل. مهارة `sport-recreation-gymnastics-research` وملفات `studies/` تبقيان خارج هذه النسخة.
 
 ### الاختبار
 

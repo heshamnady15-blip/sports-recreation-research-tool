@@ -162,19 +162,36 @@ class CleanProjectTests(unittest.TestCase):
         self.assertTrue(by_command["verify-journal"]["network"])
 
     def test_plugin_discovers_only_scientific_research(self):
+        manifest = json.loads((ROOT / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["skills"], "skills")
+        plugin_skill = ROOT / manifest["skills"] / "scientific-research"
+        self.assertTrue(plugin_skill.is_dir())
+        self.assertFalse(plugin_skill.is_symlink())
+        self.assertTrue(SKILL.is_dir())
+        self.assertFalse(SKILL.is_symlink())
         found = _discovered_skills(ROOT)
+        self.assertEqual(found, [plugin_skill])
         self.assertEqual([path.name for path in found], ["scientific-research"])
         skill_md = (found[0] / "SKILL.md").read_text(encoding="utf-8")
         self.assertTrue(skill_md.startswith("---\nname: scientific-research\n"))
+        self.assertIn("الجمباز للجميع", skill_md)
+        self.assertIn("sports recreation", skill_md)
         names = [path.relative_to(found[0]).as_posix() for path in found[0].rglob("*") if path.is_file()]
         self.assertIn("SKILL.md", names)
+        self.assertIn("scripts/policy.py", names)
         self.assertNotIn("assets/researcher-profile.json", names)
         self.assertFalse(any("gfa-active-ageing" in name.lower() for name in names))
-        self.assertFalse(any(name.startswith("studies/") or "/studies/" in name for name in names))
+        self.assertFalse(any("studies" in Path(name).parts for name in names))
         self.assertFalse((ROOT / "skills" / "sport-recreation-gymnastics-research").exists())
+        self.assertTrue((ROOT / ".agents" / "skills" / "sport-recreation-gymnastics-research" / "SKILL.md").is_file())
         identity = json.loads((found[0] / "assets" / "skill-identity.json").read_text(encoding="utf-8"))
+        self.assertEqual(identity["author"], "Dr. Hesham El-Nady")
         self.assertEqual(identity["institutional_email"], "")
         self.assertEqual(identity["orcid"], "")
+        self.assertEqual(_packaged_files(plugin_skill), _packaged_files(SKILL))
+        ran = _python(plugin_skill / "scripts" / "policy.py", ["profile"], plugin_skill)
+        self.assertEqual(ran.returncode, 0, ran.stderr)
+        self.assertFalse(json.loads(ran.stdout)["complete"])
 
     def test_local_plugin_install_keeps_studies_and_profile_out(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -202,6 +219,22 @@ class CleanProjectTests(unittest.TestCase):
             manifest = json.loads((plugin_root / ".cursor-plugin" / "plugin.json").read_text(encoding="utf-8"))
             self.assertEqual(manifest["skills"], "skills")
             self.assertNotIn("..", Path(manifest["skills"]).parts)
+
+
+def _packaged_files(skill_root: Path) -> dict[str, bytes]:
+    """Files that belong in the installed skill, excluding caches and a filled profile."""
+    files: dict[str, bytes] = {}
+    for path in skill_root.rglob("*"):
+        if not path.is_file():
+            continue
+        relative = path.relative_to(skill_root).as_posix()
+        parts = path.relative_to(skill_root).parts
+        if "__pycache__" in parts or path.suffix == ".pyc" or path.name == "researcher-profile.json":
+            continue
+        if "studies" in parts or "gfa-active-ageing" in relative.lower():
+            continue
+        files[relative] = path.read_bytes()
+    return files
 
 
 def _discovered_skills(plugin_root: Path) -> list[Path]:

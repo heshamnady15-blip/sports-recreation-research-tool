@@ -26,10 +26,15 @@ if [[ "$target" == "cursor-plugin-local" ]]; then
     echo "plugin manifest not found from $physical" >&2
     exit 1
   fi
+  plugin_skill="$repo/skills/scientific-research"
+  if [[ ! -f "$plugin_skill/SKILL.md" || -L "$plugin_skill" ]]; then
+    echo "plugin skill must be a real directory at $plugin_skill" >&2
+    exit 1
+  fi
   rm -rf "$dest"
   mkdir -p "$dest/.cursor-plugin" "$dest/skills/scientific-research"
   cp "$repo/.cursor-plugin/plugin.json" "$dest/.cursor-plugin/plugin.json"
-  cp -aL "$physical"/. "$dest/skills/scientific-research"/
+  cp -a "$plugin_skill"/. "$dest/skills/scientific-research"/
   find "$dest" -type d -name __pycache__ -prune -exec rm -rf {} +
   find "$dest" -type f -name '*.pyc' -delete
   rm -f "$dest/skills/scientific-research/assets/researcher-profile.json"
