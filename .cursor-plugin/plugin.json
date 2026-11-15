@@ -1,0 +1,17 @@
+{
+  "name": "el-nady-scientific-research",
+  "version": "2.0.0",
+  "description": "El-Nady Scientific Research Assistant by Dr. Hesham El-Nady. The skill command remains scientific-research. Version 2.0.0 is prepared for review. It has not been tagged or submitted to the Cursor Marketplace.",
+  "author": {
+    "name": "Dr. Hesham El-Nady"
+  },
+  "homepage": "https://github.com/heshamnady15-blip/sports-recreation-research-tool",
+  "repository": "https://github.com/heshamnady15-blip/sports-recreation-research-tool",
+  "keywords": [
+    "scientific-research",
+    "sport-science",
+    "gymnastics-for-all",
+    "apa-7"
+  ],
+  "skills": ".agents/skills/scientific-research"
+}

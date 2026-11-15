@@ -4,7 +4,13 @@
 
 ## scientific-research
 
-مهارة بحث علمي للترويح الرياضي، والجمباز للجميع، وعلوم الرياضة، والتربية البدنية. تعمل في Cursor وClaude وChatGPT وGemini من مجلد واحد.
+الاسم الرسمي: **El-Nady Scientific Research Assistant**. المؤلف: **Dr. Hesham El-Nady**. الاسم التقني وأمر Cursor: `scientific-research`. الإصدار المعد للمراجعة: **2.0.0**. لم يُنشأ الوسم `v2.0.0` ولم يُنشر GitHub Release. الاستشهاد في `CITATION.cff` بجذر المستودع وداخل مجلد المهارة.
+
+Prepared version: **2.0.0**. The `v2.0.0` tag and the GitHub Release are not published. Citation metadata is in the root `CITATION.cff` and in the skill folder, and the two files match.
+
+مهارة بحث علمي للترويح الرياضي، والجمباز للجميع، وعلوم الرياضة، والتربية البدنية. تعمل في Cursor وClaude وChatGPT وGemini من مجلد واحد. دليل المهارة بالعربية والإنجليزية: `.agents/skills/scientific-research/README.md`. التثبيت لمستخدم جديد: `.agents/skills/scientific-research/docs/cursor-install.md`.
+
+دراسة GfA Active Ageing في `studies/gfa-active-ageing/` مثال تطبيقي داخل المستودع. أرشيف المهارة لا يحتويها، واختبارات المهارة تعمل في مشروع نظيف بلا ملفات الدراسة.
 
 تغطي أبحاثًا أصيلة، وأبحاث ترقية وفق قواعد المجلس الأعلى للجامعات في مصر، والرسائل، والمراجعات المنهجية، والتحليل البعدي، وتحويل الرسائل إلى مقالات. اللغة عربية أو إنجليزية أو النسختان. التوثيق الافتراضي APA 7 ويُحوَّل إلى نظام المجلة. لا تُقترح مجلة Scopus قبل التحقق من ربعها ورسوم المؤلف، ولا تُكتب مراجع أو بيانات غير مسترجعة.
 

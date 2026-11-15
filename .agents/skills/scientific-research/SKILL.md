@@ -1,23 +1,36 @@
 ---
 name: scientific-research
 description: >-
-  يُعد أبحاث الترويح الرياضي والجمباز للجميع وعلوم الرياضة والتربية البدنية
-  وكبار السن والنشاط البدني والصحة الوظيفية بالعربية والإنجليزية وفق قواعد
-  المجلس الأعلى للجامعات في مصر. استخدمه لبحث أصيل، أو بحث ترقية، أو رسالة،
-  أو مراجعة منهجية، أو تحليل بعدي، أو تحويل رسالة إلى مقال، ولاختيار مجلة
-  Scopus بلا رسوم نشر إلزامية، ولمراجعة كل قسم منهجيًا وإحصائيًا وأصالته
-  وأخلاقياته، ولتدقيق DOI والمجلات والمنهج في الإصدار الثاني. Use for sports
-  recreation, Gymnastics for All, sport science, physical education, older
-  adults, functional health, Egyptian promotion rules, APA 7, and journal checks.
+  El-Nady Scientific Research Assistant, by Dr. Hesham El-Nady. يُعد أبحاث
+  الترويح الرياضي والجمباز للجميع وعلوم الرياضة والتربية البدنية وكبار السن
+  والنشاط البدني والصحة الوظيفية بالعربية والإنجليزية وفق قواعد المجلس الأعلى
+  للجامعات في مصر. استخدمه لبحث أصيل، أو بحث ترقية، أو رسالة، أو مراجعة منهجية،
+  أو تحليل بعدي، أو تحويل رسالة إلى مقال، ولاختيار مجلة Scopus بلا رسوم نشر
+  إلزامية، ولمراجعة كل قسم منهجيًا وإحصائيًا وأصالته وأخلاقياته، ولتدقيق DOI
+  والمجلات والمنهج في الإصدار الثاني. Use for sports recreation, Gymnastics
+  for All, sport science, physical education, older adults, functional health,
+  Egyptian promotion rules, APA 7, and journal checks.
+compatibility: >-
+  Python 3.9 or newer for the scripts. Profile, similarity, reference shape,
+  section review, and methods audit run offline. DOI lookup and journal-page
+  checks need network access to the named external source.
+metadata:
+  display_name: El-Nady Scientific Research Assistant
+  author: Dr. Hesham El-Nady
+  technical_name: scientific-research
+  version: "2.0.0"
+  github: heshamnady15-blip
 ---
 
 # البحث العلمي الرياضي
 
-نفّذ العمل من ملفات هذه المهارة. لا تستبدل القواعد الرسمية بذاكرة النموذج.
+الاسم الرسمي: El-Nady Scientific Research Assistant. المؤلف: Dr. Hesham El-Nady. أمر الاستدعاء في Cursor يبقى `/scientific-research` لأن اسم المجلد وحقل `name` لا يتغيران. بيانات المؤلف في `assets/skill-identity.json` ليست ملف الباحث: ملف الباحث يعبأه مستخدم المهارة، وإذا نقص حقل تتوقف المهارة ولا تخترع باحثًا.
+
+نفّذ العمل من ملفات هذه المهارة. لا تستبدل القواعد الرسمية بذاكرة النموذج. دراسة GfA Active Ageing ليست جزءًا من هذه المهارة؛ موضعها كمثال تطبيقي موضح في `references/applied-example.md`. التثبيت والاستخدام في `README.md` و`docs/cursor-install.md`.
 
 ## قبل الكتابة
 
-1. اقرأ ملف الباحث إن وُجد بجانب القالب `assets/researcher-profile.template.json`. الحقول هي الاسم والجامعة والقسم والبريد المؤسسي وORCID. إذا نقص حقل، توقف واطلبه. لا تخترع باحثًا.
+1. اقرأ ملف الباحث إن وُجد بجانب القالب `assets/researcher-profile.template.json`. الحقول هي الاسم والجامعة والقسم والبريد المؤسسي وORCID. إذا نقص حقل، توقف واطلبه. لا تخترع باحثًا. الأمر `python3 scripts/policy.py profile` يقرأ `assets/researcher-profile.json` عند غياب `--path`، ويقرأ الملف الممرَّر عند وجود `--path`. غياب الملف يبقي الملف غير مكتمل.
 2. حدّد منتجًا واحدًا: `original` أو `promotion` أو `thesis` أو `systematic_review` أو `meta_analysis` أو `thesis_to_article`.
 3. حدّد التصميم من السؤال: كمي، نوعي، مختلط، تجريبي، وصفي، ارتباطي، مراجعة منهجية، أو تحليل بعدي.
 4. حدّد الفئة من الموضوع. لا تفترض عمرًا أو مجتمعًا رياضيًا بعينه.

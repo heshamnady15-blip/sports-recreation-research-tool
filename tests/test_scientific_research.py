@@ -7,6 +7,7 @@ import sys
 import tempfile
 import unittest
 import zipfile
+from io import StringIO
 from pathlib import Path
 from unittest.mock import patch
 
@@ -15,7 +16,7 @@ SKILL = ROOT / ".agents" / "skills" / "scientific-research"
 sys.path.insert(0, str(SKILL / "scripts"))
 
 import policy  # noqa: E402
-from package_skill import build_zip  # noqa: E402
+from package_skill import build_zip, included  # noqa: E402
 
 
 def setUpModule():
@@ -180,6 +181,52 @@ class ProfileReferenceReviewTests(unittest.TestCase):
         )
         self.assertTrue(any("نتيجة إحصائية" in issue for issue in policy.review_issues(invented_stats, ["المنهج"])))
 
+    def test_profile_command_reads_the_default_file_and_still_accepts_path(self):
+        default = policy.PROFILE_PATH
+        other = SKILL / "assets" / "profile-cli-other.json"
+        complete = {
+            "name": "اسم للتجربة",
+            "university": "جامعة للتجربة",
+            "department": "قسم للتجربة",
+            "institutional_email": "person@univ.edu.eg",
+            "orcid": "0000-0002-1825-0097",
+        }
+        backup = default.read_text(encoding="utf-8") if default.exists() else None
+        try:
+            if default.exists():
+                default.unlink()
+            missing = self._profile_cli([])
+            self.assertFalse(missing["complete"])
+            self.assertEqual(missing["missing"], list(policy.PROFILE_FIELDS))
+            default.write_text(json.dumps(complete, ensure_ascii=False), encoding="utf-8")
+            loaded = self._profile_cli([])
+            self.assertTrue(loaded["complete"])
+            self.assertEqual(loaded["missing"], [])
+            other.write_text(
+                json.dumps({**complete, "name": ""}, ensure_ascii=False),
+                encoding="utf-8",
+            )
+            overridden = self._profile_cli(["--path", str(other)])
+            self.assertFalse(overridden["complete"])
+            self.assertIn("name", overridden["missing"])
+            absent = self._profile_cli(["--path", str(SKILL / "assets" / "no-such-profile.json")])
+            self.assertFalse(absent["complete"])
+            self.assertEqual(absent["missing"], list(policy.PROFILE_FIELDS))
+        finally:
+            if other.exists():
+                other.unlink()
+            if backup is None and default.exists():
+                default.unlink()
+            elif backup is not None:
+                default.write_text(backup, encoding="utf-8")
+
+    def _profile_cli(self, extra: list[str]) -> dict:
+        buffer = StringIO()
+        with patch("sys.stdout", buffer):
+            code = policy.main(["profile", *extra])
+        self.assertEqual(code, 0)
+        return json.loads(buffer.getvalue())
+
 
 class PackageTests(unittest.TestCase):
     def test_skill_layout_and_platforms(self):
@@ -209,9 +256,44 @@ class PackageTests(unittest.TestCase):
             archive = build_zip(Path(directory) / "scientific-research.zip")
             with zipfile.ZipFile(archive) as zipped:
                 names = set(zipped.namelist())
+                identity = json.loads(zipped.read("assets/skill-identity.json"))
+                template = json.loads(zipped.read("assets/researcher-profile.template.json"))
+                citation = zipped.read("CITATION.cff").decode("utf-8")
             self.assertIn("SKILL.md", names)
             self.assertIn("references/official-snapshot.json", names)
+            self.assertIn("references/applied-example.md", names)
             self.assertNotIn("assets/researcher-profile.json", names)
+            joined = "\n".join(names)
+            self.assertNotIn("researcher-profile.json", joined)
+            self.assertNotIn("gfa-active-ageing", joined.lower())
+            self.assertNotIn("studies/", joined)
+            self.assertEqual(identity["version"], "2.0.0")
+            self.assertEqual(identity["author"], "Dr. Hesham El-Nady")
+            self.assertEqual(identity["orcid"], "")
+            self.assertEqual(identity["institutional_email"], "")
+            self.assertEqual(template["name"], "")
+            self.assertEqual(template["institutional_email"], "")
+            self.assertEqual(template["orcid"], "")
+            self.assertIn("version: 2.0.0\n", citation)
+
+    def test_package_filter_drops_profile_and_study_files_and_keeps_the_note(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            study = root / "studies" / "gfa-active-ageing" / "draft.md"
+            study.parent.mkdir(parents=True)
+            study.write_text("study file", encoding="utf-8")
+            profile = root / "assets" / "researcher-profile.json"
+            profile.parent.mkdir()
+            profile.write_text("{}", encoding="utf-8")
+            skill = root / "SKILL.md"
+            skill.write_text("ok", encoding="utf-8")
+            note = root / "references" / "applied-example.md"
+            note.parent.mkdir()
+            note.write_text("The GfA Active Ageing study stays outside the skill.", encoding="utf-8")
+            self.assertFalse(included(study, root))
+            self.assertFalse(included(profile, root))
+            self.assertTrue(included(skill, root))
+            self.assertTrue(included(note, root))
 
 
 if __name__ == "__main__":

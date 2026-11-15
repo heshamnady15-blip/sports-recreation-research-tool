@@ -17,6 +17,7 @@ from pathlib import Path
 SKILL_ROOT = Path(__file__).resolve().parents[1]
 SNAPSHOT_PATH = SKILL_ROOT / "references" / "official-snapshot.json"
 PROFILE_TEMPLATE = SKILL_ROOT / "assets" / "researcher-profile.template.json"
+PROFILE_PATH = SKILL_ROOT / "assets" / "researcher-profile.json"
 
 PROFILE_FIELDS = (
     "name",
@@ -68,6 +69,14 @@ PRODUCT_SIMILARITY_SCOPE = {
 
 def load_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def load_profile(path: Path | None = None) -> dict | None:
+    """Read a researcher profile. Omit path to use assets/researcher-profile.json."""
+    chosen = PROFILE_PATH if path is None else path
+    if not chosen.is_file():
+        return None
+    return load_json(chosen)
 
 
 def journal_decision(
@@ -361,9 +370,8 @@ def main(argv: list[str] | None = None) -> int:
         _print_json(similarity_guidance(product=args.product, official_limit=limit))
         return 0
     if args.command == "profile":
-        path = Path(args.path) if args.path else None
-        data = load_json(path) if path and path.is_file() else None
-        _print_json(profile_status(data))
+        chosen = Path(args.path) if args.path else None
+        _print_json(profile_status(load_profile(chosen)))
         return 0
     if args.command == "references":
         payload = load_json(Path(args.path))
