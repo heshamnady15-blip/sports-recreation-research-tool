@@ -1,7 +1,7 @@
 {
   "name": "el-nady-scientific-research",
   "version": "2.0.0",
-  "description": "El-Nady Scientific Research Assistant by Dr. Hesham El-Nady. The skill command remains scientific-research. Version 2.0.0 is prepared for review. It has not been tagged or submitted to the Cursor Marketplace.",
+  "description": "El-Nady Scientific Research Assistant by Dr. Hesham El-Nady. It prepares original studies, promotion dossiers, theses, systematic reviews, meta-analyses, and thesis-to-article manuscripts in sport recreation, Gymnastics for All, sport science, physical education, older-adult activity, and functional health, in Arabic and English. It reviews each section for methods, statistics, originality, and ethics, checks DOI records and journal pages, and screens Scopus journals that do not require a publication fee. The skill command is scientific-research, and the default citation style is APA 7.",
   "author": {
     "name": "Dr. Hesham El-Nady"
   },
@@ -13,5 +13,5 @@
     "gymnastics-for-all",
     "apa-7"
   ],
-  "skills": ".agents/skills/scientific-research"
+  "skills": "skills"
 }

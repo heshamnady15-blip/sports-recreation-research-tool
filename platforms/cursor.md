@@ -24,6 +24,14 @@
 
 الإصدار 2.0.0 من المهارة نفسها يضيف `verify-references` و`verify-journal` و`audit-methods` و`audit` داخل `scripts/policy.py`. أمر `journal` يبقى قرارًا أوليًا، والتوصية بمجلة أو بمرجع تمر من أوامر التحقق. التقرير آلي وبالعربية والإنجليزية، ولا يُقرأ على أنه إثبات لصحة البحث كاملة.
 
+## اختبار إضافة Cursor محليًا
+
+```bash
+.agents/skills/scientific-research/scripts/install-skill.sh cursor-plugin-local
+```
+
+يُنشئ `~/.cursor/plugins/local/el-nady-scientific-research/` من `.cursor-plugin/plugin.json` ومجلد `skills/scientific-research` فقط. أعد تحميل النافذة ثم افتح Customize. هذا التثبيت لا يرسل الإضافة إلى Cursor Marketplace.
+
 ## Install and use in Cursor
 
 The public name is El-Nady Scientific Research Assistant, by Dr. Hesham El-Nady. The slash command stays `/scientific-research` because Cursor shows the folder name. The bilingual new-user guide is `.agents/skills/scientific-research/docs/cursor-install.md`.
@@ -38,4 +46,4 @@ For every project on this machine:
 
 The script copies the skill to `~/.cursor/skills/scientific-research/`. Copy `assets/researcher-profile.template.json` to `assets/researcher-profile.json` and fill your own five fields. `python3 scripts/policy.py profile` reads that file when `--path` is omitted. `--path` selects another file. A missing file stays incomplete. The skill does not invent a researcher, a reference, or a journal.
 
-Version 2.0.0 keeps `verify-references`, `verify-journal`, `audit-methods`, and `audit` in `scripts/policy.py`. The `journal` command is a preliminary decision. An automated report is not proof that the study is valid. The `v2.0.0` tag and the GitHub Release are not published from this branch.
+Version 2.0.0 keeps `verify-references`, `verify-journal`, `audit-methods`, and `audit` in `scripts/policy.py`. The `journal` command is a preliminary decision. An automated report is not proof that the study is valid. The `v2.0.0` tag and the GitHub Release are already published. This branch does not move that tag. The Cursor Marketplace listing is not submitted.
